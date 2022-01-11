@@ -1,4 +1,6 @@
+import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class contentCard extends StatelessWidget {
   String realtitle;
@@ -11,9 +13,19 @@ class contentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    favoriteProvider _favorites = Provider.of<favoriteProvider>(context);
     Widget lst = ListTile(
       title: Text(realtitle),
-      trailing: const Icon(Icons.favorite_border),
+      trailing: IconButton(
+        padding: const EdgeInsets.all(0),
+        alignment: Alignment.centerRight,
+        icon: (_favorites.hasKey(realtitle)
+            ? const Icon(Icons.favorite)
+            : const Icon(Icons.favorite_border)),
+        onPressed: () {
+          _favorites.toggleFavorite(realtitle, this);
+        },
+      ),
       subtitle: Text(place + '\n' + period),
     );
     return Container(
