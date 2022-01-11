@@ -40,6 +40,7 @@ class _BottomNavigate extends State<BottomNavigate> {
           unselectedItemColor: Colors.white70,
         ),
       ),
+      body: _page.elementAt(_index),
     );
   }
 }
