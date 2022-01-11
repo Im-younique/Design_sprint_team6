@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'addContent/addContent.dart';
 
 class BottomNavigate extends StatefulWidget {
   const BottomNavigate({Key? key, required this.title}) : super(key: key);
@@ -10,8 +11,6 @@ class BottomNavigate extends StatefulWidget {
 
 class _BottomNavigate extends State<BottomNavigate> {
   int _index = 0;
-  //리스트안에 페이지 위젯을 넣으면 됩니다.
-  List _page = [Text('1'), Text('2'), Text('3'), Text('4')];
 
   void _pageSelect(int index) {
     setState(() {
@@ -34,13 +33,31 @@ class _BottomNavigate extends State<BottomNavigate> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.perm_identity), label: '내정보')
           ],
-          onTap: _pageSelect,
+          onTap: (_index) {
+            switch (_index) {
+              case 0:
+                Navigator.pushNamed(context, "/");
+                break;
+              case 1:
+                Navigator.pushNamed(context, "/");
+                break;
+              case 2:
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddContent(),
+                    ));
+                break;
+              case 3:
+                Navigator.pushNamed(context, "/");
+                break;
+            }
+          },
           currentIndex: _index,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white70,
         ),
       ),
-      body: _page.elementAt(_index),
     );
   }
 }

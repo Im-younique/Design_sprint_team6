@@ -1,3 +1,4 @@
+import 'package:culture_app/bottomNav.dart';
 import 'package:flutter/material.dart';
 
 //Start App view
@@ -6,6 +7,10 @@ class CultureApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      home: BottomNavigate(
+        title: 'title',
+      ),
+    );
   }
 }
