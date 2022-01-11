@@ -1,9 +1,11 @@
 import 'package:culture_app/contentCard.dart';
+import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Start App view
 class favoriteList extends StatelessWidget {
-  const favoriteList({Key? key}) : super(key: key);
+  favoriteList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
