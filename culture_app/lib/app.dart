@@ -7,9 +7,9 @@ class CultureApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BottomNavigate(
-        title: 'title',
+    return const MaterialApp(
+      home: Scaffold(
+        bottomNavigationBar: BottomNavigate(),
       ),
     );
   }
