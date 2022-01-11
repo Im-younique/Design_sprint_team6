@@ -9,6 +9,14 @@ class CultureApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        primaryColor: Colors.white,
+        accentColor: const Color(0x6666AB),
+      ),
       home: favoriteList(),
     );
   }

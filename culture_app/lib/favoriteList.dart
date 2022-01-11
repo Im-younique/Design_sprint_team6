@@ -10,6 +10,9 @@ class favoriteList extends StatelessWidget {
     var favorites = <contentCard>[];
     favorites.add(
         contentCard('realtitle', 'images/lake.jpg', 'place', '210101-220105'));
+    favorites.add(
+        contentCard('realtitle', 'images/lake.jpg', 'place', '210101-220105'));
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
