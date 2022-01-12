@@ -4,18 +4,17 @@ import 'place_detail.dart';
 import 'place_reviews.dart';
 import 'place_contents.dart';
 
-class place_detail extends StatefulWidget {
+class place_reviews extends StatefulWidget {
 
   @override
-  State<place_detail> createState() => _place_detailState();
+  State<place_reviews> createState() => _place_reviewsState();
 }
 
-class _place_detailState extends State<place_detail> {
-  @override
-//asdfasdfsadf
+class _place_reviewsState extends State<place_reviews> {
+
   Route _createRoute1() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => place_reviews(),
+      pageBuilder: (context, animation, secondaryAnimation) => place_detail(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 0.0);
         var end = Offset.zero;
@@ -48,7 +47,7 @@ class _place_detailState extends State<place_detail> {
       },
     );
   }
-  //asdfasdfsadf
+  @override
   Widget build(BuildContext context) {
 
     Color color = Color(0xff6667AB);
@@ -69,6 +68,7 @@ class _place_detailState extends State<place_detail> {
 
   int viewindex = 1;
 
+  //뒤로가기 ㅇㅇ
   Widget backSection (){
     return Container(
         child: Row(
@@ -86,6 +86,8 @@ class _place_detailState extends State<place_detail> {
             ),]
         )
     );
+//뒤로가기끝
+
 
   }
   // 버튼섹션 함수로 바꿨음
@@ -108,6 +110,9 @@ class _place_detailState extends State<place_detail> {
             style: TextButton.styleFrom(
               primary: Colors.white,
             ), onPressed: () {
+            Navigator.of(context).push(_createRoute1());
+
+
           },
             child: Text('DETAIL'),
           ),
@@ -137,8 +142,6 @@ class _place_detailState extends State<place_detail> {
             style: TextButton.styleFrom(
               primary: Colors.white,
             ), onPressed: () {
-              Navigator.of(context).push(_createRoute1());
-
 
           },
             child: Text('REVIEW'),
@@ -150,17 +153,17 @@ class _place_detailState extends State<place_detail> {
 
   // 버튼섹션 함수 끝
   Widget contentSection (){
-      return Container(
-        padding: EdgeInsets.all(32),
-        child: Text(
-          'DETAIL\nDETAIL\DETAIL\nDETAILasdfasdf',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 15,
-          ),
-          softWrap: true,
+    return Container(
+      padding: EdgeInsets.all(32),
+      child: Text(
+        'REVIEWS\nREVIEWS\nREVIEWS\nasdfasdfasdf',
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 15,
         ),
-      );
+        softWrap: true,
+      ),
+    );
 
 
   }
