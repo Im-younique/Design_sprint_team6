@@ -51,21 +51,9 @@ class AddLocation extends StatelessWidget {
             margin: EdgeInsets.only(top: 300),
             height: MediaQuery.of(context).size.height * 0.7,
             color: Colors.white,
-          ),
-          Column(
-            children: [
-              Container(
-                  margin: EdgeInsets.only(
-                    top: 300,
-                  ),
-                  width: MediaQuery.of(context).size.width * 1,
-                  height: 50,
-                  child: const SearchPostal()),
-              SizedBox(
-                height: 20,
-              ),
-              TextFeilds()
-            ],
+            child: Container(
+                width: MediaQuery.of(context).size.width * 1,
+                child: const SearchPostal()),
           ),
         ],
       );
@@ -97,6 +85,7 @@ class SearchPostal extends StatefulWidget {
 
 class _SearchPostal extends State<StatefulWidget> {
   final detailAddressController = TextEditingController();
+
   String postCode = '-';
   String address = '-';
   String latitude = '-';
@@ -121,6 +110,7 @@ class _SearchPostal extends State<StatefulWidget> {
                   setState(() {
                     postCode = result.postCode;
                     address = result.address;
+                    print(address);
                     latitude = result.latitude.toString();
                     longitude = result.longitude.toString();
                     kakaoLatitude = result.kakaoLatitude.toString();
@@ -130,69 +120,60 @@ class _SearchPostal extends State<StatefulWidget> {
               ),
             ));
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          Text(
-            '주소 검색하기',
-            style: AddAppBar.textStyleSmall(),
-          ),
-          Icon(
-            Icons.search,
-            color: AddAppBar.color(),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class TextFeilds extends StatefulWidget {
-  const TextFeilds({Key? key}) : super(key: key);
-
-  @override
-  State<TextFeilds> createState() => _TextFeildsState();
-}
-
-class _TextFeildsState extends State<TextFeilds> {
-  final detailAddressController = TextEditingController();
-  String address = "";
-
-  @override
-  Widget build(BuildContext context) {
-    setState(() {
-      address = _SearchPostal().address;
-    });
-    return SingleChildScrollView(
-      child: Form(
-        child: Container(
-          child: Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                decoration: InputDecoration(labelText: '주소', hintText: '주소'),
-                controller: TextEditingController(text: '${address}'),
+              Text(
+                '주소 검색하기',
+                style: AddAppBar.textStyleSmall(),
               ),
-              TextField(
-                controller: detailAddressController,
-                decoration: const InputDecoration(
-                    labelText: '상세 주소', hintText: '상세 주소'),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
-                  style: buttonThema2(),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Additional()));
-                  },
-                  child: const Text(
-                    '다음으로',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ))
+              Icon(
+                Icons.search,
+                color: AddAppBar.color(),
+              )
             ],
           ),
-        ),
+          Divider(),
+          SizedBox(
+            height: 10,
+          ),
+          SingleChildScrollView(
+            child: Form(
+              child: Container(
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: '주소'),
+                      controller: TextEditingController(text: '${address}'),
+                    ),
+                    TextField(
+                      controller: detailAddressController,
+                      decoration: const InputDecoration(
+                          labelText: '상세 주소', hintText: '상세 주소'),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                        style: buttonThema2(),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Additional()));
+                        },
+                        child: const Text(
+                          '다음으로',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

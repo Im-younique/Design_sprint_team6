@@ -18,7 +18,32 @@ class Additional extends StatelessWidget {
                 ));
           },
           icon: Icon(Icons.clear))),
-      bottomNavigationBar: BottomNavigate(),
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          const SizedBox.expand(
+            child: Image(
+              image: AssetImage('images/category.jpeg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
+            ),
+            Container(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.8,
+                color: Colors.black54,
+                child: const Text(
+                  '추가 설명을\n작성해 주세요',
+                  style: TextStyle(fontSize: 40, color: Colors.white),
+                )),
+          ]),
+        ],
+      ),
     );
   }
 }
