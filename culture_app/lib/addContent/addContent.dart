@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addContentCategory.dart';
 import 'appbar.dart';
+import '../home.dart';
 
 class AddContent extends StatelessWidget {
   const AddContent({Key? key}) : super(key: key);
@@ -8,7 +9,15 @@ class AddContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AddAppBar.appbar(),
+      appBar: AddAppBar.appbar(IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Homepage(),
+                ));
+          },
+          icon: Icon(Icons.clear))),
       extendBodyBehindAppBar: true,
       body: const NewWidget(),
     );
@@ -67,7 +76,7 @@ class NewWidget extends StatelessWidget {
                                 MaterialStateProperty.all<EdgeInsetsGeometry>(
                                     EdgeInsets.all(20.0)),
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xff6667AB))),
+                                AddAppBar.color())),
                         onPressed: _next,
                         child: const Text('시작하기'),
                       ),

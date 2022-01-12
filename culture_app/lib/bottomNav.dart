@@ -1,3 +1,4 @@
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 import 'addContent/addContent.dart';
 
@@ -21,7 +22,11 @@ class BottomNavigate extends StatelessWidget {
       onTap: (_index) {
         switch (_index) {
           case 0:
-            Navigator.pushNamed(context, "/");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Homepage(),
+                ));
             break;
           case 1:
             Navigator.pushNamed(context, "/");

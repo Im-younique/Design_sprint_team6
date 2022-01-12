@@ -1,11 +1,20 @@
+import 'package:culture_app/addContent/addAdditional.dart';
 import 'package:culture_app/addContent/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:kpostal/kpostal.dart';
 import 'appbar.dart';
+import '../home.dart';
 
 ButtonStyle buttonThema() {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(10)),
+  );
+}
+
+ButtonStyle buttonThema2() {
+  return ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(AddAppBar.color()),
     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(10)),
   );
 }
@@ -39,17 +48,41 @@ class AddLocation extends StatelessWidget {
                 )),
           ]),
           Container(
+            margin: EdgeInsets.only(top: 300),
+            height: MediaQuery.of(context).size.height * 0.7,
             color: Colors.white,
-            margin: EdgeInsets.symmetric(vertical: 300),
-            child: const SearchPostal(),
-          )
+          ),
+          Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(
+                    top: 300,
+                  ),
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: 50,
+                  child: const SearchPostal()),
+              SizedBox(
+                height: 20,
+              ),
+              TextFeilds()
+            ],
+          ),
         ],
       );
     }
 
     return Scaffold(
-      appBar: AddAppBar.appbar(),
+      appBar: AddAppBar.appbar(IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Homepage(),
+                ));
+          },
+          icon: Icon(Icons.clear))),
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       body: stack(),
     );
   }
@@ -64,7 +97,6 @@ class SearchPostal extends StatefulWidget {
 
 class _SearchPostal extends State<StatefulWidget> {
   final detailAddressController = TextEditingController();
-
   String postCode = '-';
   String address = '-';
   String latitude = '-';
@@ -86,7 +118,6 @@ class _SearchPostal extends State<StatefulWidget> {
             MaterialPageRoute(
               builder: (_) => KpostalView(
                 callback: (Kpostal result) {
-                  print(result.address);
                   setState(() {
                     postCode = result.postCode;
                     address = result.address;
@@ -99,14 +130,17 @@ class _SearchPostal extends State<StatefulWidget> {
               ),
             ));
       },
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             '주소 검색하기',
             style: AddAppBar.textStyleSmall(),
           ),
-          const Divider(),
-          TextFeilds()
+          Icon(
+            Icons.search,
+            color: AddAppBar.color(),
+          )
         ],
       ),
     );
@@ -122,20 +156,43 @@ class TextFeilds extends StatefulWidget {
 
 class _TextFeildsState extends State<TextFeilds> {
   final detailAddressController = TextEditingController();
+  String address = "";
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      address = _SearchPostal().address;
+    });
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          const TextField(
-            decoration: InputDecoration(labelText: '주소', hintText: '주소'),
+      child: Form(
+        child: Container(
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: '주소', hintText: '주소'),
+                controller: TextEditingController(text: '${address}'),
+              ),
+              TextField(
+                controller: detailAddressController,
+                decoration: const InputDecoration(
+                    labelText: '상세 주소', hintText: '상세 주소'),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  style: buttonThema2(),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Additional()));
+                  },
+                  child: const Text(
+                    '다음으로',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ))
+            ],
           ),
-          TextField(
-            controller: detailAddressController,
-            decoration: InputDecoration(labelText: '상세 주소', hintText: '상세 주소'),
-          ),
-        ],
+        ),
       ),
     );
   }

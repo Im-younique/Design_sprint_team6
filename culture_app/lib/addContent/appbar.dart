@@ -1,18 +1,24 @@
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 
 class AddAppBar {
-  static AppBar appbar() {
+  static AppBar appbar(IconButton iconButton) {
     return AppBar(
       backgroundColor: Colors.transparent,
       //아이콘 홈으로 가는 걸로 설정해야함
       actions: [
-        IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {},
-        )
+        iconButton
+        // IconButton(
+        //   icon: Icon(Icons.clear),
+        //   onPressed: () {},
+        // )
       ],
       elevation: 0,
     );
+  }
+
+  static Color color() {
+    return Color(0xff6667AB);
   }
 
   static TextStyle textStyleSmall() {

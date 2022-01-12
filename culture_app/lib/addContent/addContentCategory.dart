@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addLocation.dart';
 import 'appbar.dart';
+import '../home.dart';
 
 class AddContentCategory extends StatelessWidget {
   const AddContentCategory({Key? key}) : super(key: key);
@@ -8,7 +9,15 @@ class AddContentCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AddAppBar.appbar(),
+      appBar: AddAppBar.appbar(IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Homepage(),
+                ));
+          },
+          icon: Icon(Icons.clear))),
       extendBodyBehindAppBar: true,
       body: selectCategory(),
     );
