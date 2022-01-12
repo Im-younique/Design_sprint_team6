@@ -67,7 +67,7 @@ class NewWidget extends StatelessWidget {
                       style: TextStyle(fontSize: 17, color: Colors.white),
                     ),
                     SizedBox(
-                      height: 60,
+                      height: 50,
                     ),
                     Center(
                       child: ElevatedButton(

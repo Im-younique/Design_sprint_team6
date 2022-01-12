@@ -49,7 +49,6 @@ class _AdditionalState extends State<Additional> {
             Container(
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.8,
                 color: Colors.black54,
                 child: const Text(
                   '추가 설명을\n작성해 주세요',
@@ -59,9 +58,8 @@ class _AdditionalState extends State<Additional> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             margin:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.4),
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
             color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.6,
             child: ListView(
               children: [
                 const TextField(

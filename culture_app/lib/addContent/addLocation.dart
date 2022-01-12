@@ -41,9 +41,8 @@ class AddLocation extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.8,
+                  padding: const EdgeInsets.only(left: 10, top: 10),
                   color: Colors.black54,
                   child: const Text(
                     '등록할 컨텐츠가 있는\n위치를 알려주세요',
@@ -56,11 +55,9 @@ class AddLocation extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.4),
-              height: MediaQuery.of(context).size.height * 0.6,
               color: Colors.white,
               child: Container(
-                  width: MediaQuery.of(context).size.width * 1,
-                  child: const SearchPostal()),
+                  width: double.infinity, child: const SearchPostal()),
             ),
           ),
         ],
