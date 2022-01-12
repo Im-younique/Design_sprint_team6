@@ -1,3 +1,4 @@
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 
 //Start App view
@@ -6,6 +7,9 @@ class CultureApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      title: 'Culture_app',
+      home: Homepage(),
+    );
   }
 }
