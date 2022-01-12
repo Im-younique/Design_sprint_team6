@@ -15,13 +15,17 @@ class _SearchState extends State<Search> {
     return Scaffold(
         body: Column(
       children: [
-        Container(margin: const EdgeInsets.only(top: 35)),
+        Container(margin: const EdgeInsets.only(top: 35)), //top margin
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              width: 20.w,
-            ),
+                width: 20.w,
+                padding: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(right: 10),
+                child: InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(Icons.arrow_back_ios))),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Color(0xff6667AB), width: 2),
@@ -34,29 +38,27 @@ class _SearchState extends State<Search> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 5, top: 2, bottom: 4),
-                    child: const Image(
-                      image: AssetImage('images/logo.png'),
-                    ),
+                    child: SearchTab(), //Text("검색이라는 hint가 들어간다."),
                   ),
-                  Container(
-                    width: 260.0.w,
-                  ),
-                  //Expanded() 적용시 constraintsError 발생
-                  //마찬가지로 때려넣으면 반응형으로 적응이 안되서,,
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Search()));
-                      },
-                      child: const Icon(Icons.search)),
+                  InkWell(onTap: () {}, child: const Icon(Icons.search)),
                 ],
               ),
             ),
             Container(
-              width: 20.0.w,
-            ),
+                width: 20.0.w,
+                margin: EdgeInsets.only(left: 10, right: 10),
+                child: Icon(Icons.filter_alt)),
           ],
         ),
+        Divider(
+          height: 40.h,
+          thickness: 2,
+          color: Colors.grey,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("검색결과")],
+        )
       ],
     ));
   }
@@ -79,18 +81,40 @@ class _SearchTabState extends State<SearchTab> {
   Widget _buildTextComposer() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: TextField(
-        controller: _textController,
-        onSubmitted: _handleSubmitted,
-        decoration: const InputDecoration.collapsed(hintText: 'Send a message'),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextField(
+              controller: _textController,
+              onSubmitted: _handleSubmitted,
+              decoration: const InputDecoration.collapsed(hintText: '검색어 입력'),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildTextComposer(),
+    return Container(
+      width: 270.w,
+      height: 30.h,
+      child: _buildTextComposer(),
     );
+  }
+}
+
+class SearchFilter extends StatefulWidget {
+  const SearchFilter({Key? key}) : super(key: key);
+
+  @override
+  _SearchFilterState createState() => _SearchFilterState();
+}
+
+class _SearchFilterState extends State<SearchFilter> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

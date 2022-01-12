@@ -207,6 +207,11 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff6667AB),
+        onPressed: () => {},
+        child: Icon(Icons.map),
+      ),
     );
   }
 }
