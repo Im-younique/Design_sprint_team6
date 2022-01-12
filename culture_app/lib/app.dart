@@ -1,5 +1,9 @@
+import 'package:culture_app/contentCard.dart';
+import 'package:culture_app/favoriteList.dart';
+import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Start App view
 class CultureApp extends StatelessWidget {
@@ -9,7 +13,17 @@ class CultureApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Culture_app',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        primaryColor: Colors.white,
+        accentColor: const Color(0x6666AB),
+      ),
       home: Homepage(),
     );
   }
 }
+
+//           contentCard('title', 'images/lake.jpg', 'location', '210103-220105'),
