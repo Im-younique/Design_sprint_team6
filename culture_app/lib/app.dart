@@ -1,5 +1,10 @@
 import 'package:culture_app/bottomNav.dart';
+import 'package:culture_app/contentCard.dart';
+import 'package:culture_app/favoriteList.dart';
+import 'package:culture_app/provider/favoriteProvider.dart';
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //Start App view
 class CultureApp extends StatelessWidget {
@@ -7,10 +12,19 @@ class CultureApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        bottomNavigationBar: BottomNavigate(),
+    return MaterialApp(
+      title: 'Culture_app',
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        primaryColor: Colors.white,
+        accentColor: const Color(0x6666AB),
       ),
+      home: Homepage(),
     );
   }
 }
+
+//           contentCard('title', 'images/lake.jpg', 'location', '210103-220105'),

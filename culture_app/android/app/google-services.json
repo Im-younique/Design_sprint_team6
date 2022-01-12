@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "478874876989",
+    "project_id": "designsprint-team6",
+    "storage_bucket": "designsprint-team6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478874876989:android:fcf5bbd6a75d16d6dcfe54",
+        "android_client_info": {
+          "package_name": "com.example.culture_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478874876989-cnojelmk4eplp7v7keje0q48lsognq6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHpdCeovewNea7IeCm1wxlxRlWSij6Hm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478874876989-cnojelmk4eplp7v7keje0q48lsognq6e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "478874876989-j20ff7d3q5l1sc450kink8do829hh3qc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gtkFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
