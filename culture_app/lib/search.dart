@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'bottomNav.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -13,54 +14,62 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: BottomNavigate(),
         body: Column(
-      children: [
-        Container(margin: const EdgeInsets.only(top: 35)), //top margin
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-                width: 20.w,
-                padding: EdgeInsets.only(left: 10),
-                margin: EdgeInsets.only(right: 10),
-                child: InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Icon(Icons.arrow_back_ios))),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xff6667AB), width: 2),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10.0),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 5, top: 2, bottom: 4),
-                    child: SearchTab(), //Text("검색이라는 hint가 들어간다."),
+          children: [
+            Container(margin: const EdgeInsets.only(top: 35)), //top margin
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                    width: 20.w,
+                    padding: EdgeInsets.only(left: 10),
+                    margin: EdgeInsets.only(right: 10),
+                    child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: Icon(Icons.arrow_back_ios))),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xff6667AB), width: 2),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
                   ),
-                  InkWell(onTap: () {}, child: const Icon(Icons.search)),
-                ],
-              ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(left: 5, top: 2, bottom: 4),
+                        child: SearchTab(),
+                      ),
+                      InkWell(
+                          onTap: () {
+                            //search 결과화면으로 향합니다.
+                          },
+                          child: const Icon(Icons.search)),
+                    ],
+                  ),
+                ),
+                Container(
+                    width: 20.0.w,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    child: Icon(Icons.filter_alt)), //filter를 stack으로 쌓습니다.
+              ],
             ),
             Container(
-                width: 20.0.w,
-                margin: EdgeInsets.only(left: 10, right: 10),
-                child: Icon(Icons.filter_alt)),
+              width: 355.w,
+              child: Divider(
+                height: 40.h,
+                thickness: 2,
+                color: Colors.grey,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text("검색결과")],
+            )
           ],
-        ),
-        Divider(
-          height: 40.h,
-          thickness: 2,
-          color: Colors.grey,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("검색결과")],
-        )
-      ],
-    ));
+        ));
   }
 }
 
@@ -99,7 +108,7 @@ class _SearchTabState extends State<SearchTab> {
   Widget build(BuildContext context) {
     return Container(
       width: 270.w,
-      height: 30.h,
+      height: 36.h,
       child: _buildTextComposer(),
     );
   }
