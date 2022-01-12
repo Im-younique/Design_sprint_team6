@@ -1,49 +1,93 @@
 import 'package:flutter/material.dart';
-import 'bottomNav.dart';
+import 'place_detail_main.dart';
+import 'place_detail.dart';
+import 'place_reviews.dart';
+import 'place_contents.dart';
 
-class place_detail extends StatelessWidget {
+class place_contents extends StatefulWidget {
 
+
+  @override
+  State<place_contents> createState() => _place_contentsState();
+}
+
+class _place_contentsState extends State<place_contents> {
+
+  Route _createRoute1() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => place_detail(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
+  Route _createRoute2() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => place_reviews(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(0.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+  @override
   Widget build(BuildContext context) {
 
     Color color = Color(0xff6667AB);
 
-    return MaterialApp(
-      title: 'place_contents',
-      home: Scaffold(
-        body: ListView(
-          children: [
-            titleSection(),
-            buttonSection(),
-            textSection(),
-          ],
-        ),
+    return Scaffold(
+      body: ListView(
+        children: [
+          backSection(),
+          titleSection(),
+          buttonSection(),
+          contentSection(),
+        ],
       ),
+
     );
+
   }
 
-  // 이건 필 없을 듯?
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
+  int viewindex = 1;
+
+  Widget backSection (){
+    return Container(
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              color: Color(0xff6667AB),
+              iconSize: 25,
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => place_detail_main()),
+                );
+              },
+            ),]
+        )
     );
+
   }
-
-
   // 버튼섹션 함수로 바꿨음
   Widget buttonSection (){
     return Container(
@@ -60,51 +104,57 @@ class place_detail extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            'DETAIL',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ), onPressed: () {
+            Navigator.of(context).push(_createRoute1());
+
+
+          },
+            child: Text('DETAIL'),
+          ),
           Text(
               'ㅣ',
               style: TextStyle(
                 color: Colors.white,
               )
           ),
-          Text(
-            'CONTENTS',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ), onPressed: () {
+
+          },
+            child: Text('CONTENTS'),
+          ),
           Text(
               'ㅣ',
               style: TextStyle(
                 color: Colors.white,
               )
           ),
-          Text(
-            'REVIEW',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ), onPressed: () {
+            Navigator.of(context).push(_createRoute2());
+
+
+          },
+            child: Text('REVIEW'),
+          ),
         ],
       ),
     );
   }
-  // 버튼섹션 함수 끝
 
-  // 텍스트섹션 함수로 만듦
-  Widget textSection (){
-    return Padding(
+  // 버튼섹션 함수 끝
+  Widget contentSection (){
+    return Container(
       padding: EdgeInsets.all(32),
       child: Text(
-        '여기다가는 진행되고 있는 행사를 크롤링해서 가져오면 될거같아요',
+        'CONTENTS\nCONTENTS\nCONTENTS\CONTENTSasdfasdfasd',
         style: TextStyle(
           color: Colors.black87,
           fontSize: 15,
@@ -112,21 +162,27 @@ class place_detail extends StatelessWidget {
         softWrap: true,
       ),
     );
-  }
-// 텍스트섹션 함수로 만든거 끝
 
+
+  }
+
+// 텍스트섹션 함수로 만든거 끝
   Widget titleSection (){
     return Container(
       padding: const EdgeInsets.only(left:30,right:30,top:50,bottom:30),
       child: Row(
         children: [
-          Card(
-            elevation: 5,
-            child: Image.asset(
-              'images/lake.jpg',
-              width: 117,
-              height: 116,
-              fit: BoxFit.fill,
+          Positioned(
+            top: 90,
+            left: 30,
+            child: Card(
+              elevation: 5,
+              child: Image.asset(
+                'images/lake.jpg',
+                width: 117,
+                height: 130,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
 
@@ -174,8 +230,4 @@ class place_detail extends StatelessWidget {
       ),
     );
   }
-
-
-
-
 }
