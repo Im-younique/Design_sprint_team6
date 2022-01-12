@@ -1,6 +1,7 @@
 import 'package:culture_app/contentCard.dart';
 import 'package:culture_app/favoriteList.dart';
 import 'package:culture_app/provider/favoriteProvider.dart';
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ class CultureApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Culture_app',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           color: Colors.white,
@@ -19,12 +21,7 @@ class CultureApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: const Color(0x6666AB),
       ),
-      home: ChangeNotifierProvider(
-        create: (BuildContext context) {
-          return favoriteProvider();
-        },
-        child: favoriteList(),
-      ),
+      home: Homepage(),
     );
   }
 }
