@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'search.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +30,7 @@ class _HomepageState extends State<Homepage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(left: 20),
+                width: 20.w,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -47,15 +49,24 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                     Container(
-                      width: 290.0,
+                      width: 260.0.w,
                     ),
                     //Expanded() 적용시 constraintsError 발생
                     //마찬가지로 때려넣으면 반응형으로 적응이 안되서,,
-                    const Icon(Icons.search),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Search()));
+                        },
+                        child: const Icon(Icons.search)),
                   ],
                 ),
               ),
-              Container(margin: const EdgeInsets.only(right: 20)),
+              Container(
+                width: 20.0.w,
+              ),
             ],
           ),
           myMargin,
@@ -111,8 +122,8 @@ class _HomepageState extends State<Homepage> {
               Column(
                 children: [
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("뮤지컬"),
                       onPressed: () => {},
@@ -120,8 +131,8 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("축제"),
                       onPressed: () => {},
@@ -132,16 +143,16 @@ class _HomepageState extends State<Homepage> {
               Column(
                 children: [
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("전시회"),
                       onPressed: () => {},
                     ),
                   ),
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("만들기 공방"),
                       onPressed: () => {},
@@ -152,16 +163,16 @@ class _HomepageState extends State<Homepage> {
               Column(
                 children: [
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("버스킹"),
                       onPressed: () => {},
                     ),
                   ),
                   Container(
-                    width: 120,
-                    height: 40,
+                    width: 110.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       child: Text("시사회"),
                       onPressed: () => {},
