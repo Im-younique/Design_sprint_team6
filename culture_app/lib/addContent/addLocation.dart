@@ -39,8 +39,9 @@ class AddLocation extends StatelessWidget {
                 )),
           ]),
           Container(
-            child: SearchPostal(),
-            margin: EdgeInsets.only(top: 300, left: 20),
+            color: Colors.white,
+            margin: EdgeInsets.symmetric(vertical: 300),
+            child: const SearchPostal(),
           )
         ],
       );
@@ -62,6 +63,8 @@ class SearchPostal extends StatefulWidget {
 }
 
 class _SearchPostal extends State<StatefulWidget> {
+  final detailAddressController = TextEditingController();
+
   String postCode = '-';
   String address = '-';
   String latitude = '-';
@@ -85,20 +88,54 @@ class _SearchPostal extends State<StatefulWidget> {
                 callback: (Kpostal result) {
                   print(result.address);
                   setState(() {
-                    this.postCode = result.postCode;
-                    this.address = result.address;
-                    this.latitude = result.latitude.toString();
-                    this.longitude = result.longitude.toString();
-                    this.kakaoLatitude = result.kakaoLatitude.toString();
-                    this.kakaoLongitude = result.kakaoLongitude.toString();
+                    postCode = result.postCode;
+                    address = result.address;
+                    latitude = result.latitude.toString();
+                    longitude = result.longitude.toString();
+                    kakaoLatitude = result.kakaoLatitude.toString();
+                    kakaoLongitude = result.kakaoLongitude.toString();
                   });
                 },
               ),
             ));
       },
-      child: Text(
-        '주소 검색하기',
-        style: AddAppBar.textStyleSmall(),
+      child: Column(
+        children: [
+          Text(
+            '주소 검색하기',
+            style: AddAppBar.textStyleSmall(),
+          ),
+          const Divider(),
+          TextFeilds()
+        ],
+      ),
+    );
+  }
+}
+
+class TextFeilds extends StatefulWidget {
+  const TextFeilds({Key? key}) : super(key: key);
+
+  @override
+  State<TextFeilds> createState() => _TextFeildsState();
+}
+
+class _TextFeildsState extends State<TextFeilds> {
+  final detailAddressController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const TextField(
+            decoration: InputDecoration(labelText: '주소', hintText: '주소'),
+          ),
+          TextField(
+            controller: detailAddressController,
+            decoration: InputDecoration(labelText: '상세 주소', hintText: '상세 주소'),
+          ),
+        ],
       ),
     );
   }
