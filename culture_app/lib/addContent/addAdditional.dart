@@ -1,3 +1,4 @@
+import 'package:time_range/time_range.dart';
 import 'package:culture_app/addContent/appbar.dart';
 import 'package:culture_app/addContent/complete.dart';
 import 'package:culture_app/bottomNav.dart';
@@ -19,6 +20,11 @@ class Additional extends StatefulWidget {
 }
 
 class _AdditionalState extends State<Additional> {
+  static Color color = AddAppBar.color();
+  late TimeRangeResult timeResult;
+
+  DateTime first = DateTime.now();
+  DateTime second = DateTime.now();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -62,18 +68,48 @@ class _AdditionalState extends State<Additional> {
             color: Colors.white,
             child: ListView(
               children: [
-                const TextField(
+                TextField(
+                  controller: TextEditingController(
+                      text:
+                          '${first.year}/${first.month}/${first.day}~${second.year}/${second.month}/${second.day}'),
                   decoration: InputDecoration(labelText: '날짜', hintText: '날짜'),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: Text('날짜 선택'),
+                  onPressed: () {
+                    selectDate();
+                  },
+                  child: Text(
+                    '날짜 선택',
+                    style: TextStyle(
+                        color: AddAppBar.color(), fontWeight: FontWeight.bold),
+                  ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(labelText: '시간', hintText: '시간'),
+                Divider(thickness: 1.5),
+                Text(
+                  '시간 ${timeResult.start.format(context)}-${timeResult.end.format(context)}',
+                  style: AddAppBar.textStyleSmall(),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 5,
+                ),
+                TimeRange(
+                    borderColor: color,
+                    activeBackgroundColor: color,
+                    backgroundColor: Colors.white,
+                    fromTitle: Text('Start'),
+                    toTitle: Text('End'),
+                    firstTime: TimeOfDay(hour: 00, minute: 30),
+                    lastTime: TimeOfDay(hour: 23, minute: 30),
+                    timeBlock: 30,
+                    timeStep: 30,
+                    onRangeCompleted: (range) => setState(() {
+                          timeResult = range!;
+                        })),
+                Divider(
+                  thickness: 1.5,
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 const TextField(
                   decoration:
@@ -101,12 +137,38 @@ class _AdditionalState extends State<Additional> {
                     child: const Text(
                       '등록하기',
                       style: TextStyle(color: Colors.white, fontSize: 20),
-                    ))
+                    )),
+                SizedBox(
+                  height: 40,
+                )
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> selectDate() async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: first,
+        firstDate: DateTime(2022),
+        lastDate: DateTime(2024));
+    DateTime? pickedSecondDate = await showDatePicker(
+        context: context,
+        initialDate: first,
+        firstDate: DateTime(2022),
+        lastDate: DateTime(2024));
+
+    if (pickedDate != null &&
+        pickedDate != first &&
+        pickedSecondDate != null &&
+        pickedSecondDate != second) {
+      setState(() {
+        first = pickedDate;
+        second = pickedSecondDate;
+      });
+    }
   }
 }
