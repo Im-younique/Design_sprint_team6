@@ -8,7 +8,8 @@ import '../home.dart';
 ButtonStyle buttonThema() {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(10)),
+    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        EdgeInsets.symmetric(vertical: 10, horizontal: 20)),
   );
 }
 
@@ -37,23 +38,30 @@ class AddLocation extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.2,
             ),
-            Container(
-                padding: const EdgeInsets.only(left: 10, top: 10),
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.8,
-                color: Colors.black54,
-                child: const Text(
-                  '등록할 컨텐츠가 있는\n위치를 알려주세요',
-                  style: TextStyle(fontSize: 40, color: Colors.white),
-                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  color: Colors.black54,
+                  child: const Text(
+                    '등록할 컨텐츠가 있는\n위치를 알려주세요',
+                    style: TextStyle(fontSize: 40, color: Colors.white),
+                  )),
+            ),
           ]),
-          Container(
-            margin: EdgeInsets.only(top: 300),
-            height: MediaQuery.of(context).size.height * 0.7,
-            color: Colors.white,
+          Expanded(
+            flex: 2,
             child: Container(
-                width: MediaQuery.of(context).size.width * 1,
-                child: const SearchPostal()),
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.4),
+              height: MediaQuery.of(context).size.height * 0.6,
+              color: Colors.white,
+              child: Container(
+                  width: MediaQuery.of(context).size.width * 1,
+                  child: const SearchPostal()),
+            ),
           ),
         ],
       );
