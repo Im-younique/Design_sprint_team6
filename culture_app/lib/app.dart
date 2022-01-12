@@ -1,3 +1,4 @@
+import 'package:culture_app/bottomNav.dart';
 import 'package:culture_app/contentCard.dart';
 import 'package:culture_app/favoriteList.dart';
 import 'package:culture_app/provider/favoriteProvider.dart';

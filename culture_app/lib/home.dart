@@ -5,6 +5,7 @@ import 'search.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'bottomNav.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -22,6 +23,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigate(),
       body: ListView(
         children: [
           myMargin,
