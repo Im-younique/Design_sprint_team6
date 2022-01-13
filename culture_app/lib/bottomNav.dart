@@ -4,6 +4,7 @@ import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'addContent/addContent.dart';
+import 'myPage/myPage.dart';
 
 class BottomNavigate extends StatelessWidget {
   const BottomNavigate({
@@ -46,7 +47,11 @@ class BottomNavigate extends StatelessWidget {
                 ));
             break;
           case 3:
-            Navigator.pushNamed(context, "/");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Mypage(),
+                ));
             break;
         }
       },
