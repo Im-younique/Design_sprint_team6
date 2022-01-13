@@ -76,6 +76,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
     - images/category.jpeg
     - images/lake.jpg
+    - images/placephoto.jpg
+    - images/placelogo.jpg
 
   # To add assets to your application, add an assets section, like this:
 
