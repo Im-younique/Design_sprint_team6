@@ -1,4 +1,5 @@
 import 'package:culture_app/addContent/addAdditional.dart';
+import 'package:culture_app/addContent/addContentCategory.dart';
 import 'package:culture_app/addContent/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:kpostal/kpostal.dart';
@@ -20,11 +21,50 @@ ButtonStyle buttonThema2() {
   );
 }
 
-class AddLocation extends StatelessWidget {
-  const AddLocation({Key? key}) : super(key: key);
+class AddLocation extends StatefulWidget {
+  const AddLocation({Key? key, required this.genre}) : super(key: key);
+  final String genre;
+
+  @override
+  State<AddLocation> createState() => _AddLocationState();
+}
+
+class _AddLocationState extends State<AddLocation> {
+  String postCode = '-';
+  String address = '-';
+  String detailLocation = '';
+
+  final detailAddressController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    detailAddressController.addListener(() {
+      detailLocation = detailAddressController.text;
+      detailAddressController.value = detailAddressController.value.copyWith(
+        text: detailLocation,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    String category = widget.genre;
+    KpostalView(
+      useLocalServer: true, // default is false
+      localPort: 8080, // default is 8080
+    );
+
+    void onTap() {
+      List<String> list = [address, detailLocation, category];
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Additional(
+                    address: list,
+                  )));
+    }
+
     Widget stack() {
       return Stack(
         children: [
@@ -55,7 +95,82 @@ class AddLocation extends StatelessWidget {
                 height: 600,
                 color: Colors.white,
                 child: Container(
-                    width: double.infinity, child: const SearchPostal()),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: buttonThema(),
+                      onPressed: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => KpostalView(
+                                callback: (Kpostal result) {
+                                  setState(() {
+                                    postCode = result.postCode;
+                                    address = result.address;
+                                  });
+                                },
+                              ),
+                            ));
+                      },
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '주소 검색하기',
+                                style: AddAppBar.textStyleSmall(),
+                              ),
+                              Icon(
+                                Icons.search,
+                                color: AddAppBar.color(),
+                              )
+                            ],
+                          ),
+                          Divider(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SingleChildScrollView(
+                            child: Form(
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    TextField(
+                                      decoration:
+                                          InputDecoration(labelText: '주소'),
+                                      controller:
+                                          TextEditingController(text: address),
+                                      enabled: false,
+                                    ),
+                                    TextField(
+                                      controller: detailAddressController,
+                                      decoration: const InputDecoration(
+                                          labelText: '상세 주소',
+                                          hintText: '상세 주소'),
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    ElevatedButton(
+                                        style: buttonThema2(),
+                                        onPressed: () {
+                                          onTap();
+                                        },
+                                        child: const Text(
+                                          '다음으로',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
               ),
             ),
           ]),
@@ -76,109 +191,6 @@ class AddLocation extends StatelessWidget {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       body: stack(),
-    );
-  }
-}
-
-class SearchPostal extends StatefulWidget {
-  const SearchPostal({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _SearchPostal();
-}
-
-class _SearchPostal extends State<StatefulWidget> {
-  final detailAddressController = TextEditingController();
-
-  String postCode = '-';
-  String address = '-';
-  String latitude = '-';
-  String longitude = '-';
-  String kakaoLatitude = '-';
-  String kakaoLongitude = '-';
-  @override
-  Widget build(BuildContext context) {
-    KpostalView(
-      useLocalServer: true, // default is false
-      localPort: 8080, // default is 8080
-    );
-    // TODO: implement build
-    return ElevatedButton(
-      style: buttonThema(),
-      onPressed: () async {
-        await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => KpostalView(
-                callback: (Kpostal result) {
-                  setState(() {
-                    postCode = result.postCode;
-                    address = result.address;
-                    print(address);
-                    latitude = result.latitude.toString();
-                    longitude = result.longitude.toString();
-                    kakaoLatitude = result.kakaoLatitude.toString();
-                    kakaoLongitude = result.kakaoLongitude.toString();
-                  });
-                },
-              ),
-            ));
-      },
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '주소 검색하기',
-                style: AddAppBar.textStyleSmall(),
-              ),
-              Icon(
-                Icons.search,
-                color: AddAppBar.color(),
-              )
-            ],
-          ),
-          Divider(),
-          SizedBox(
-            height: 10,
-          ),
-          SingleChildScrollView(
-            child: Form(
-              child: Container(
-                child: Column(
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(labelText: '주소'),
-                      controller: TextEditingController(text: '${address}'),
-                    ),
-                    TextField(
-                      controller: detailAddressController,
-                      decoration: const InputDecoration(
-                          labelText: '상세 주소', hintText: '상세 주소'),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                        style: buttonThema2(),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Additional()));
-                        },
-                        child: const Text(
-                          '다음으로',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ))
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
     );
   }
 }
