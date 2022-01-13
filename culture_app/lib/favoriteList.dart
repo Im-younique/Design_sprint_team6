@@ -17,15 +17,14 @@ class favoriteList extends StatelessWidget {
         contentCard('realtitle', 'images/lake.jpg', 'place', '210101-220105'));
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('찜 목록'),
-      ),
-      body: ListView(
-        children: favorites,
-      ),
-      bottomNavigationBar: BottomNavigate(),
-    );
+        bottomNavigationBar: BottomNavigate(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('찜 목록'),
+        ),
+        body: ListView(
+          children: favorites,
+        ));
   }
 }
 
