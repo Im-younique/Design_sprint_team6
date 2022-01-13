@@ -14,6 +14,11 @@ import 'content.dart';
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
+  List<String> adList = [
+    "https://i.pinimg.com/564x/f5/86/23/f58623fe8765b80ce36966c5f0d207d6.jpg",
+    "http://cdnimage.dailian.co.kr/news/202011/news_1605229225_936431_m_1.jpeg",
+    "https://i.pinimg.com/736x/9c/18/50/9c1850e31d993169d20a2162e0b65ba2.jpg"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -164,11 +169,11 @@ class Homepage extends StatelessWidget {
                   child: Swiper(
                     itemBuilder: (BuildContext context, int index) {
                       return Image.network(
-                        "https://via.placeholder.com/288x188",
+                        adList[index],
                         fit: BoxFit.fill,
                       );
                     },
-                    itemCount: 10,
+                    itemCount: 3,
                     viewportFraction: 0.8,
                     scale: 0.9,
                     itemWidth: 288.0,
@@ -184,6 +189,7 @@ class Homepage extends StatelessWidget {
         ],
       ),
       floatingActionButton: Container(
+        margin: EdgeInsets.only(left: 2.0),
         width: 80.w,
         height: 80.h,
         child: FloatingActionButton(
@@ -242,8 +248,7 @@ Widget mytemp() {
               ));
         }
 
-        return Scaffold(
-          bottomNavigationBar: BottomNavigate(),
+        return const Scaffold(
           body: CircularProgressIndicator(),
         );
       });
