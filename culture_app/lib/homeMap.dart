@@ -220,7 +220,7 @@ class _HomeMapState extends State<HomeMap> {
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Homepage()),)
             },
-            child: Icon(Icons.map,
+            child: Icon(Icons.insert_drive_file,
             size: 30.w,),
           ),
         )
