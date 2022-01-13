@@ -46,6 +46,7 @@ dependencies:
   google_maps_flutter_web: ^0.3.2+1
   time_range: ^1.0.2
   flutter_screenutil: ^5.0.3
+  flutterfire_ui: ^0.3.1
 
 fonts:
   - family: cafe
@@ -63,7 +64,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  # flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
