@@ -22,6 +22,7 @@ class _HomeMapState extends State<HomeMap> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        bottomNavigationBar: BottomNavigate(),
         body: Stack(children: [
           GoogleMap(
             onMapCreated: _onMapCreated,
