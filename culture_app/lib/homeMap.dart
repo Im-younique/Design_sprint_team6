@@ -1,5 +1,6 @@
 import 'package:culture_app/bottomNav.dart';
 import 'package:culture_app/home.dart';
+import 'package:culture_app/place_detail_main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,12 +19,31 @@ class HomeMap extends StatefulWidget {
 
 class _HomeMapState extends State<HomeMap> {
   late GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
+  final LatLng _center = const LatLng(36.366327, 127.345094); // 시립미술관 위치는 36.367039, 127.386317
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+
+
+  Set<Marker> _createMarker() {
+    return <Marker>[
+      Marker(
+        markerId: MarkerId("marker_1"),
+        position: LatLng(36.366428, 127.383686),
+        infoWindow: InfoWindow(
+          title: "대전시립미술관",
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => place_detail_main()));
+          },
+
+        ),
+      ),
+    ].toSet();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +55,10 @@ class _HomeMapState extends State<HomeMap> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 11.0,
+              zoom: 17.0,
             ),
+            markers: _createMarker(),
+
           ),
           Positioned(
             top: 40,
