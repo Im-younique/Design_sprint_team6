@@ -21,7 +21,8 @@ class Additional extends StatefulWidget {
 
 class _AdditionalState extends State<Additional> {
   static Color color = AddAppBar.color();
-  late TimeRangeResult timeResult;
+  TimeRangeResult timeResult = TimeRangeResult(
+      TimeOfDay(hour: 12, minute: 30), TimeOfDay(hour: 12, minute: 30));
 
   DateTime first = DateTime.now();
   DateTime second = DateTime.now();
