@@ -152,11 +152,13 @@ class _AdditionalState extends State<Additional> {
 
   Future<void> selectDate() async {
     DateTime? pickedDate = await showDatePicker(
+        helpText: '시작 날짜',
         context: context,
         initialDate: first,
         firstDate: DateTime(2022),
         lastDate: DateTime(2024));
     DateTime? pickedSecondDate = await showDatePicker(
+        helpText: '종료 날짜',
         context: context,
         initialDate: first,
         firstDate: DateTime(2022),
