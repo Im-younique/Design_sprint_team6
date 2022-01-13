@@ -5,7 +5,9 @@ import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'homeMap.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 //Start App view
 class CultureApp extends StatelessWidget {

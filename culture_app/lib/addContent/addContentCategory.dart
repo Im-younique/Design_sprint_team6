@@ -64,28 +64,29 @@ class selectCategory extends StatelessWidget {
                   '등록할 컨텐츠의\n종류를 알려주세요',
                   style: TextStyle(fontSize: 40, color: Colors.white),
                 )),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                color: Colors.black54,
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return Container(
-                          child: ElevatedButton(
-                              style: buttonThema(),
-                              onPressed: () {
-                                _categoryNext();
-                              },
-                              child: Text(
-                                '${categories[index]}',
-                                style: AddAppBar.textStyleBig(),
-                              )));
-                    },
-                    padding: EdgeInsets.all(10),
-                    itemCount: categories.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(
-                          height: 10,
-                        ))),
+            Expanded(
+              child: Container(
+                  color: Colors.black54,
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Container(
+                            child: ElevatedButton(
+                                style: buttonThema(),
+                                onPressed: () {
+                                  _categoryNext();
+                                },
+                                child: Text(
+                                  '${categories[index]}',
+                                  style: AddAppBar.textStyleBig(),
+                                )));
+                      },
+                      padding: EdgeInsets.all(10),
+                      itemCount: categories.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                            height: 10,
+                          ))),
+            ),
           ],
         )
       ]),

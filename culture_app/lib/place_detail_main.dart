@@ -3,6 +3,7 @@ import 'place_detail_main.dart';
 import 'place_detail.dart';
 import 'place_reviews.dart';
 import 'place_contents.dart';
+import 'bottomNav.dart';
 
 class place_detail_main extends StatefulWidget {
 
@@ -17,6 +18,7 @@ class _place_detail_mainState extends State<place_detail_main> {
     Color color = Color(0xff6667AB);
       print('1234');
       return Scaffold(
+          bottomNavigationBar: BottomNavigate(),
           body: Stack(children: [
             ListView(
               children: [
@@ -32,7 +34,7 @@ class _place_detail_mainState extends State<place_detail_main> {
               child: Card(
                 elevation: 5,
                 child: Image.asset(
-                  'images/lake.jpg',
+                  'images/placelogo.jpg',
                   width: 117,
                   height: 130,
                   fit: BoxFit.fill,
@@ -181,7 +183,7 @@ class _place_detail_mainState extends State<place_detail_main> {
 Widget titleSection() {
   return Container(
     child: Image.asset(
-      'images/lake2.jpg',
+      'images/placephoto.jpg',
       width: 500,
       height: 183,
       fit: BoxFit.fill,
