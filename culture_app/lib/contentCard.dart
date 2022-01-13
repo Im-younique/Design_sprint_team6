@@ -34,7 +34,7 @@ class contentCard extends StatelessWidget {
         child: (Row(
           children: [
             Container(
-              child: Image.asset(
+              child: Image.network(
                 img,
                 fit: BoxFit.fill,
                 width: 130,

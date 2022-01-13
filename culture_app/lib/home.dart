@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'search.dart';
+import 'homeMap.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bottomNav.dart';
+import 'content.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -19,6 +21,14 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   CollectionReference frTest = FirebaseFirestore.instance.collection('test');
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
+  List<content> contents = [
+    content(
+        21012360,
+        '백지영 전국투어 콘서트 <BAEK HUG>',
+        'http://ticketimage.interpark.com/rz/image/play/goods/poster/21/21012360_p_s.jpg',
+        '대전컨벤션센터(DCC)',
+        '22.01.22-22.01.22')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -106,15 +116,16 @@ class _HomepageState extends State<Homepage> {
                           child: Column(
                             children: [
                               Container(
-                                decoration: BoxDecoration(
-                                    color: Color(0xff6667AB),
-                                    //decoration_image: 대체
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0))),
-                                width: 120.0,
-                                height: 200.0,
+                                child: Image.network(
+                                  contents[0].img, // index를 []안에 넣으면 됨
+                                  width: 130.0,
+                                  height: 200.0,
+                                ),
                               ),
-                              Text("__의 버스킹 $index")
+                              Container(
+                                child: Text(contents[0].realtitle),
+                                width: 130,
+                              ),
                             ],
                           ),
                         );
@@ -215,12 +226,21 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff6667AB),
-        onPressed: () => {
-          //homeMap 연결시키면 됩니다
-        },
-        child: Icon(Icons.map),
+      floatingActionButton: Container(
+        width: 80.w,
+        height: 80.h,
+        child: FloatingActionButton(
+          backgroundColor: Color(0xff6667AB),
+          onPressed: () => {
+            //homeMap 연결시키면 됩니다
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeMap()),
+            )
+            //homeMap 연결시키면 됩니다
+          },
+          child: Icon(Icons.map, size: 30.w),
+        ),
       ),
     );
   }

@@ -1,11 +1,7 @@
-# Design_sprint_team6
-Design_sprint_team6
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-void main() => runApp(MyApp());
 
 const MaterialColor primaryWhite = MaterialColor(
   _whitePrimaryValue,
@@ -68,25 +64,25 @@ class FirstRoute extends StatelessWidget {
               margin: EdgeInsets.only(top: 250),
               child:
               Text("이종호님 환영합니다!",
-              style: TextStyle(fontFamily: "cafe",
-              fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: "cafe",
+                    fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-              Text("문찐이 아니라면 시작하세요",
+            Text("문찐이 아니라면 시작하세요",
               style: TextStyle(fontFamily: "cafe",
                   fontSize: 20, fontWeight: FontWeight.bold),
             ),
-        SizedBox(height: 10,),
+            SizedBox(height: 10,),
             Center(
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.black)),
                 onPressed: (){Navigator.push(context,
-                   MaterialPageRoute(builder: (context) => SecondRoute()));
+                    MaterialPageRoute(builder: (context) => SecondRoute()));
                 },
                 child: Text('Start!', style: TextStyle(fontFamily: "cafe",
-               color: Colors.white,
-               fontSize: 17,
-               fontWeight: FontWeight.bold) ),
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold) ),
 
               ),
             ),
@@ -129,8 +125,8 @@ class SecondRoute extends StatelessWidget {
               margin: EdgeInsets.only(top: 250),
               child:
               Text("당신은 누구인가요?",
-              style: TextStyle(fontFamily: "cafe",
-              fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontFamily: "cafe",
+                    fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: 20,),
@@ -139,13 +135,13 @@ class SecondRoute extends StatelessWidget {
                 children: [
                   Container(
                   ),
-                    ElevatedButton(
-                      child: Text("참여자"),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ThirdRoute()));
-                      },
-                    ),
+                  ElevatedButton(
+                    child: Text("참여자"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ThirdRoute()));
+                    },
+                  ),
                   SizedBox(height: 10,),
                   ElevatedButton(
                     child: Text("제공자(개인)"),
@@ -195,51 +191,51 @@ class ThirdRoute extends StatelessWidget {
               fit: BoxFit.cover
           ),
         ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children:<Widget> [
+            Container(
+              margin: EdgeInsets.only(top: 250),
+              child:
+              Text("당신의 성별은 무엇입니까?",
+                style: TextStyle(fontFamily: "cafe",
+                    fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20,),
+            Center(
               child: Column(
-               mainAxisSize: MainAxisSize.max,
-               mainAxisAlignment: MainAxisAlignment.start,
-                children:<Widget> [
-               Container(
-                  margin: EdgeInsets.only(top: 250),
-                  child:
-                  Text("당신의 성별은 무엇입니까?",
-                   style: TextStyle(fontFamily: "cafe",
-                         fontSize: 20, fontWeight: FontWeight.bold),
+                children: [
+                  Container(
                   ),
-                 ),
-                  SizedBox(height: 20,),
-                  Center(
-                    child: Column(
-                      children: [
-                        Container(
-                        ),
-                        ElevatedButton(
-                          child: Text("남성"),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => FourthRoute()));
-                          },
-                        ),
-                        SizedBox(height: 10,),
-                        ElevatedButton(
-                          child: Text("여성"),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => FourthRoute()));
-                          },
-                        ),
-                        SizedBox(height: 10,),
-                        ElevatedButton(
-                          child: Text("기타"),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => FourthRoute()));
-                          },
-                        ),
-                      ],
-                    ),
+                  ElevatedButton(
+                    child: Text("남성"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FourthRoute()));
+                    },
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(
+                    child: Text("여성"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FourthRoute()));
+                    },
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(
+                    child: Text("기타"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FourthRoute()));
+                    },
                   ),
                 ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -473,34 +469,35 @@ class SixthRoute extends StatelessWidget {
           ),
         ),
         child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment:MainAxisAlignment.start,
-            children: <Widget> [
-              Container(
-                margin: EdgeInsets.only(top: 250),
-                child:
-                Text("고생하셨습니다!",
-                  style: TextStyle(fontFamily: "cafe",
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment:MainAxisAlignment.start,
+          children: <Widget> [
+            Container(
+              margin: EdgeInsets.only(top: 250),
+              child:
+              Text("고생하셨습니다!",
+                style: TextStyle(fontFamily: "cafe",
+                    fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 40,),
-        Center(
-        child: Column(
-        children: [
-            ElevatedButton(
-            child: Text("슬기로운 문화생활 시작!"),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => FifthRoute()));
-        },
-    ),
-    ],
-    ),
-    ),
-    ],
-    ),
+            ),
+            SizedBox(height: 40,),
+            Center(
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    child: Text("슬기로운 문화생활 시작!"),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FifthRoute()));
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+// jaewan
