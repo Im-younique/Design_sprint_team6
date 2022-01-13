@@ -215,12 +215,20 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff6667AB),
-        onPressed: () => {
-          //homeMap 연결시키면 됩니다
-        },
-        child: Icon(Icons.map),
+      floatingActionButton: Container(
+        width: 80.w,
+        height: 80.h,
+        child: FloatingActionButton(
+          backgroundColor: Color(0xff6667AB),
+          onPressed: () => {
+            //homeMap 연결시키면 됩니다
+          },
+          child: Container(
+              child: Icon(
+            Icons.map,
+            size: 30.w,
+          )),
+        ),
       ),
     );
   }

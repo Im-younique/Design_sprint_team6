@@ -11,6 +11,42 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
+
+  List gernefilter = ["전체", '뮤지컬', "전시회", "버스킹", "축제", "만들기 공방", "시사회"];
+  List sortfilter = ["거리순", "인기순", "리뷰순", "별점순"];
+  List artistfilter = ["전체", "음악가", "미술가", "디자이너", "배우"];
+
+  Widget showFilter() {
+    return Dialog(
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 600.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              children: [
+                Text("검색필터"),
+                Row(
+                  children: [
+                    for (var item in gernefilter) Chip(label: Text(item))
+                  ],
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            top: -100,
+            child: Text("sdf"),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +89,9 @@ class _SearchState extends State<Search> {
                 Container(
                     width: 20.0.w,
                     margin: EdgeInsets.only(left: 10, right: 10),
-                    child: Icon(Icons.filter_alt)), //filter를 stack으로 쌓습니다.
+                    child: InkWell(
+                        onTap: () => showFilter(),
+                        child: Icon(Icons.filter_alt))), //filter를 dialog
               ],
             ),
             Container(
@@ -85,6 +123,7 @@ class _SearchTabState extends State<SearchTab> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
+    //Text를 남겨놓고 검색될수 있도록 수정 필요
   }
 
   Widget _buildTextComposer() {
