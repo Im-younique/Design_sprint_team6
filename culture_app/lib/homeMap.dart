@@ -219,7 +219,6 @@ class _HomeMapState extends State<HomeMap> {
             onPressed: () => {
               Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const Homepage()),)
-              //homeMap 연결시키면 됩니다
             },
             child: Icon(Icons.map,
             size: 30.w,),
