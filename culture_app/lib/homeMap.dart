@@ -35,6 +35,7 @@ class _HomeMapState extends State<HomeMap> {
             child: Column(
               children: [
                 Container(
+                  // 검색창 영역
                   margin: EdgeInsets.only(bottom: 10),
                   child: Row(
                     children: [
@@ -67,8 +68,9 @@ class _HomeMapState extends State<HomeMap> {
                       Container(margin: const EdgeInsets.only(right: 20)),
                     ],
                   ),
-                ),
+                ), // 검색창 영역
                 Row(
+                  // 카테고리 영역
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
@@ -135,7 +137,7 @@ class _HomeMapState extends State<HomeMap> {
                       ],
                     ),
                   ],
-                ),
+                ), // 카테고리 영역
               ],
             ),
           ),
