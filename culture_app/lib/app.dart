@@ -4,6 +4,7 @@ import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'homeMap.dart';
 
 //Start App view
 class CultureApp extends StatelessWidget {
@@ -21,7 +22,7 @@ class CultureApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: const Color(0x6666AB),
       ),
-      home: Homepage(),
+      home: HomeMap(),
     );
   }
 }
