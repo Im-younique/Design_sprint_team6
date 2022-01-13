@@ -41,6 +41,21 @@ class _HomeMapState extends State<HomeMap> {
 
         ),
       ),
+      Marker(
+        markerId: MarkerId("marker_1"),
+        position: LatLng(36.366327, 127.345094),
+        infoWindow: InfoWindow(
+          title: "이재완의 철학 콘서트",
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => place_detail_main()));
+          },
+
+        ),
+      ),
+
     ].toSet();
   }
 
