@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'search.dart';
+import 'homeMap.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -218,6 +219,9 @@ class _HomepageState extends State<Homepage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xff6667AB),
         onPressed: () => {
+          //homeMap 연결시키면 됩니다
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomeMap()),)
           //homeMap 연결시키면 됩니다
         },
         child: Icon(Icons.map),
