@@ -1,5 +1,8 @@
+import 'package:culture_app/favoriteList.dart';
 import 'package:culture_app/home.dart';
+import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'addContent/addContent.dart';
 
 class BottomNavigate extends StatelessWidget {
@@ -29,7 +32,11 @@ class BottomNavigate extends StatelessWidget {
                 ));
             break;
           case 1:
-            Navigator.pushNamed(context, "/");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => favoriteList(),
+                ));
             break;
           case 2:
             Navigator.push(
