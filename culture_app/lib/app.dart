@@ -22,7 +22,7 @@ class CultureApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: const Color(0x6666AB),
       ),
-      home: HomeMap(),
+      home: Homepage(),
     );
   }
 }
