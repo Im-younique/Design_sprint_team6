@@ -34,12 +34,12 @@ class AddLocation extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Column(children: [
+          ListView(children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.15,
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(left: 10, top: 10),
@@ -49,17 +49,16 @@ class AddLocation extends StatelessWidget {
                     style: TextStyle(fontSize: 40, color: Colors.white),
                   )),
             ),
-          ]),
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.4),
-              color: Colors.white,
+            Expanded(
+              flex: 2,
               child: Container(
-                  width: double.infinity, child: const SearchPostal()),
+                height: 600,
+                color: Colors.white,
+                child: Container(
+                    width: double.infinity, child: const SearchPostal()),
+              ),
             ),
-          ),
+          ]),
         ],
       );
     }
