@@ -1,5 +1,6 @@
 import 'package:culture_app/addContent/addContent.dart';
 import 'package:culture_app/addContent/addLocation.dart';
+import 'package:flutter/services.dart';
 import 'package:time_range/time_range.dart';
 import 'package:culture_app/addContent/appbar.dart';
 import 'package:culture_app/addContent/complete.dart';
@@ -9,6 +10,8 @@ import 'appbar.dart';
 import '../home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 ButtonStyle buttonThema2() {
   return ButtonStyle(
@@ -35,6 +38,12 @@ class _AdditionalState extends State<Additional> {
 
   final titleController = TextEditingController();
   final detailController = TextEditingController();
+
+  File? image;
+  File? image2;
+  String defaultImagePath =
+      'https://mblogthumb-phinf.pstatic.net/MjAxNzA1MjFfMjYz/MDAxNDk1MzY3NjIwMDk0.N2lb8iFGLe4KNNQmS_WoVyRGvpcz32trH3n6CfjKFrwg.PjC9SL53682VQy-Z9mJZIRDEc6zyTOq-rlitMfbcwpIg.JPEG.leetjd46/image_6043514981495367601407.jpg?type=w800';
+  final ImagePicker picker = ImagePicker();
 
   @override
   void initState() {
@@ -66,6 +75,36 @@ class _AdditionalState extends State<Additional> {
     CollectionReference content =
         FirebaseFirestore.instance.collection('contentCard');
 
+    Future pikingImage() async {
+      try {
+        final image = await picker.pickImage(source: ImageSource.gallery);
+
+        if (image == null) return;
+        final imageTemporary = File(image.path);
+
+        setState(() {
+          this.image = imageTemporary;
+        });
+      } on PlatformException catch (e) {
+        print('failed to pick image:$e');
+      }
+    }
+
+    Future pikingImage2() async {
+      try {
+        final image2 = await picker.pickImage(source: ImageSource.gallery);
+
+        if (image2 == null) return;
+        final imageTemporary2 = File(image2.path);
+
+        setState(() {
+          this.image2 = imageTemporary2;
+        });
+      } on PlatformException catch (e) {
+        print('failed to pick image:$e');
+      }
+    }
+
     Future<void> addContent() {
       return content
           .add({
@@ -74,8 +113,10 @@ class _AdditionalState extends State<Additional> {
                 '${first.year}.${first.month}.${first.day}-${second.year}.${second.month}.${second.day}',
             'realtitle': '${title}',
             // 'time':
-            //     '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}: ${timeResult.end.minute}',
+            //     '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}:${timeResult.end.minute}',
             'place': '${list[0]} ${list[1]}',
+            'img': '${defaultImagePath}',
+            'img2': '${defaultImagePath}'
           })
           .then((value) => print("add complete"))
           .catchError((error) => {print("failed")});
@@ -180,6 +221,60 @@ class _AdditionalState extends State<Additional> {
                 const SizedBox(
                   height: 20,
                 ),
+                Text(
+                  '사진 넣기',
+                  style: TextStyle(fontSize: 15, color: Colors.black54),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                //image picker
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: 130,
+                        width: 130,
+                        color: Colors.black12,
+                        child: image != null
+                            ? Image.file(image!)
+                            : IconButton(
+                                tooltip: '첫번째 사진',
+                                onPressed: () {
+                                  pikingImage();
+                                },
+                                icon: Icon(
+                                  Icons.camera_enhance,
+                                  size: 40,
+                                ),
+                              ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: 130,
+                        width: 130,
+                        color: Colors.black12,
+                        child: image2 != null
+                            ? Image.file(image2!)
+                            : IconButton(
+                                tooltip: '두번째 사진',
+                                onPressed: () {
+                                  pikingImage2();
+                                },
+                                icon: Icon(
+                                  Icons.camera_enhance,
+                                  size: 40,
+                                ),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+
                 ElevatedButton(
                     style: buttonThema2(),
                     onPressed: () {
