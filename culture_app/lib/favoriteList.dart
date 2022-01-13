@@ -2,6 +2,7 @@ import 'package:culture_app/contentCard.dart';
 import 'package:culture_app/provider/favoriteProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'bottomNav.dart';
 
 //Start App view
 class favoriteList extends StatelessWidget {
@@ -16,13 +17,15 @@ class favoriteList extends StatelessWidget {
         contentCard('realtitle', 'images/lake.jpg', 'place', '210101-220105'));
 
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('찜 목록'),
-        ),
-        body: ListView(
-          children: favorites,
-        ));
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('찜 목록'),
+      ),
+      body: ListView(
+        children: favorites,
+      ),
+      bottomNavigationBar: BottomNavigate(),
+    );
   }
 }
 
