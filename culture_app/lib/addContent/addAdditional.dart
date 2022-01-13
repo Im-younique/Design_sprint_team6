@@ -118,7 +118,13 @@ class _AdditionalState extends State<Additional> {
             'img': '${defaultImagePath}',
             'img2': '${defaultImagePath}'
           })
-          .then((value) => print("add complete"))
+          .then((value) => {
+                content.doc(value.id).collection(value.id).doc('detail').set({
+                  'introduce': '${detail}',
+                  'time':
+                      '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}:${timeResult.end.minute}'
+                })
+              })
           .catchError((error) => {print("failed")});
     }
 
