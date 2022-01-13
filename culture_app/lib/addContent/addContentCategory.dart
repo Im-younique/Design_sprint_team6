@@ -36,9 +36,14 @@ ButtonStyle buttonThema() {
 class selectCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _categoryNext() {
+    void _categoryNext(index) {
+      String value = categories[index];
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => AddLocation()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => AddLocation(
+                    genre: value,
+                  )));
     }
 
     // TODO: implement build
@@ -73,7 +78,7 @@ class selectCategory extends StatelessWidget {
                             child: ElevatedButton(
                                 style: buttonThema(),
                                 onPressed: () {
-                                  _categoryNext();
+                                  _categoryNext(index);
                                 },
                                 child: Text(
                                   '${categories[index]}',

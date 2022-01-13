@@ -1,3 +1,5 @@
+import 'package:culture_app/addContent/addContent.dart';
+import 'package:culture_app/addContent/addLocation.dart';
 import 'package:time_range/time_range.dart';
 import 'package:culture_app/addContent/appbar.dart';
 import 'package:culture_app/addContent/complete.dart';
@@ -5,6 +7,8 @@ import 'package:culture_app/bottomNav.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 import '../home.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 ButtonStyle buttonThema2() {
   return ButtonStyle(
@@ -15,6 +19,8 @@ ButtonStyle buttonThema2() {
 }
 
 class Additional extends StatefulWidget {
+  Additional({Key? key, required this.address}) : super(key: key);
+  final List<String> address;
   @override
   State<Additional> createState() => _AdditionalState();
 }
@@ -24,10 +30,57 @@ class _AdditionalState extends State<Additional> {
   TimeRangeResult timeResult = TimeRangeResult(
       TimeOfDay(hour: 12, minute: 30), TimeOfDay(hour: 12, minute: 30));
 
+  String title = "";
+  String detail = "";
+
+  final titleController = TextEditingController();
+  final detailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    titleController.addListener(() {
+      title = titleController.text;
+      titleController.value = titleController.value.copyWith(
+        text: title,
+      );
+    });
+    super.initState();
+    detailController.addListener(() {
+      detail = detailController.text;
+      detailController.value = detailController.value.copyWith(text: detail);
+    });
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    super.dispose();
+  }
+
   DateTime first = DateTime.now();
   DateTime second = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    List<String> list = widget.address;
+    CollectionReference content =
+        FirebaseFirestore.instance.collection('contentCard');
+
+    Future<void> addContent() {
+      return content
+          .add({
+            'gerne': '${list[2]}',
+            'period':
+                '${first.year}.${first.month}.${first.day}-${second.year}.${second.month}.${second.day}',
+            'realtitle': '${title}',
+            // 'time':
+            //     '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}: ${timeResult.end.minute}',
+            'place': '${list[0]} ${list[1]}',
+          })
+          .then((value) => print("add complete"))
+          .catchError((error) => {print("failed")});
+    }
+
     // TODO: implement build
     return Scaffold(
       appBar: AddAppBar.appbar(IconButton(
@@ -112,7 +165,8 @@ class _AdditionalState extends State<Additional> {
                 const SizedBox(
                   height: 10,
                 ),
-                const TextField(
+                TextField(
+                  controller: titleController,
                   decoration:
                       InputDecoration(labelText: '컨텐츠 이름', hintText: '컨텐츠 이름'),
                 ),
@@ -129,6 +183,7 @@ class _AdditionalState extends State<Additional> {
                 ElevatedButton(
                     style: buttonThema2(),
                     onPressed: () {
+                      addContent();
                       Navigator.push(
                           context,
                           MaterialPageRoute(

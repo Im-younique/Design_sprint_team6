@@ -9,6 +9,7 @@ import 'homeMap.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bottomNav.dart';
+import 'content.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -96,6 +97,14 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
+  List<content> contents = [
+    content(
+        21012360,
+        '백지영 전국투어 콘서트 <BAEK HUG>',
+        'http://ticketimage.interpark.com/rz/image/play/goods/poster/21/21012360_p_s.jpg',
+        '대전컨벤션센터(DCC)',
+        '22.01.22-22.01.22')
+  ];
 
   Map contentsMap = Map<String, dynamic>();
   List randomList = [];
