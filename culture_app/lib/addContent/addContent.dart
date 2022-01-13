@@ -44,6 +44,10 @@ class NewWidget extends StatelessWidget {
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.5,
+            child: Image.asset(
+              'images/live-music.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
           Stack(
             children: [
