@@ -54,7 +54,6 @@ class _AdditionalState extends State<Additional> {
         text: title,
       );
     });
-    super.initState();
     detailController.addListener(() {
       detail = detailController.text;
       detailController.value = detailController.value.copyWith(text: detail);
@@ -170,6 +169,7 @@ class _AdditionalState extends State<Additional> {
             child: ListView(
               children: [
                 TextField(
+                  enabled: false,
                   controller: TextEditingController(
                       text:
                           '${first.year}/${first.month}/${first.day}~${second.year}/${second.month}/${second.day}'),
@@ -220,7 +220,8 @@ class _AdditionalState extends State<Additional> {
                 const SizedBox(
                   height: 20,
                 ),
-                const TextField(
+                TextField(
+                  controller: detailController,
                   decoration:
                       InputDecoration(labelText: '간략한 설명', hintText: '간략한 설명'),
                 ),
