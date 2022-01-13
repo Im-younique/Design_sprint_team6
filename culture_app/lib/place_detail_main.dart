@@ -1,123 +1,133 @@
 import 'package:flutter/material.dart';
-import 'bottomNav.dart';
+import 'place_detail_main.dart';
+import 'place_detail.dart';
+import 'place_reviews.dart';
+import 'place_contents.dart';
 
-class place_detail_main extends StatelessWidget {
+class place_detail_main extends StatefulWidget {
 
   @override
+  State<place_detail_main> createState() => _place_detail_mainState();
+}
+
+class _place_detail_mainState extends State<place_detail_main> {
+  int viewindex = 0;
+  @override
   Widget build(BuildContext context) {
-
     Color color = Color(0xff6667AB);
-
-    return MaterialApp(
-      title: 'place_detail_main',
-      home: Scaffold(
-          body: Stack(
+      print('1234');
+      return Scaffold(
+          body: Stack(children: [
+            ListView(
               children: [
-                ListView(
-                  children: [
-                    titleSection(),
-                    infoSection(),
-                    buttonSection(),
-                    textSection(),
-                  ],
+                titleSection(),
+                infoSection(),
+                buttonSection(),
+                contentSection(),
+              ],
+            ),
+            Positioned(
+              top: 90,
+              left: 30,
+              child: Card(
+                elevation: 5,
+                child: Image.asset(
+                  'images/lake.jpg',
+                  width: 117,
+                  height: 130,
+                  fit: BoxFit.fill,
                 ),
-                Positioned(
-                  top: 110, left: 30,
-                  child :Card(
-                    elevation: 5,
-                    child: Image.asset(
-                      'images/lake.jpg',
-                      width: 117,
-                      height: 130,
+              ),
+            )
+          ]));
 
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                )
-
-              ]
-          )
-      ),
-    );
   }
 
 
   // 버튼섹션 함수로 바꿨음
-  Widget buttonSection (){
+  Widget buttonSection() {
     return Container(
       decoration: BoxDecoration(
           color: Color(0xff2F305E),
           borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: Colors.black, width:3)),
+          border: Border.all(color: Colors.black, width: 3)),
       height: 35,
       width: 337,
       margin: EdgeInsets.only(right: 30, left: 30),
-
-
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            'DETAIL',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
-          Text(
-              'ㅣ',
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder : (context) => place_detail()),
+              );
+
+            },
+            child: Text('DETAIL'),
+          ),
+          Text('ㅣ',
               style: TextStyle(
                 color: Colors.white,
-              )
+              )),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder : (context) => place_contents()),
+              );
+            },
+            child: Text('CONTENTS'),
           ),
-          Text(
-            'CONTENTS',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
-          Text(
-              'ㅣ',
+          Text('ㅣ',
               style: TextStyle(
                 color: Colors.white,
-              )
+              )),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder : (context) => place_reviews()),
+              );
+            },
+            child: Text('REVIEW'),
           ),
-          Text(
-            'REVIEW',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),),
         ],
       ),
     );
   }
+
   // 버튼섹션 함수 끝
-
-  // 텍스트섹션 함수로 만듦
-  Widget textSection (){
-    return Padding(
-      padding: EdgeInsets.all(32),
-      child: Text(
-        '여기다가는 크롤링해온 정보를 넣으면 될거같아요'
-            'ㅇㅁㄴㅇㄹㅇㄴㅇㅁㄹㅇㄴㅁㄹㅇㅁ',
-        style: TextStyle(
-          color: Colors.black87,
-          fontSize: 15,
+  Widget contentSection() {
+    // 1이면 ~~ 2이면 ~~ 3이면 ~~
+      return Container(
+        padding: EdgeInsets.all(32),
+        child: Text(
+          '여기다가는 상세정보를 넣으면 될거같아요',
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 15,
+          ),
+          softWrap: true,
         ),
-        softWrap: true,
-      ),
-    );
-  }
-// 텍스트섹션 함수로 만든거 끝
+      );
 
-  // 간단정보섹션 함수로 만듦
-  Widget infoSection (){
+  }
+
+// 텍스트섹션 함수로 만든거 끝
+  Widget infoSection() {
     return Container(
-      padding: const EdgeInsets.only(left:10,right:30,top:100,bottom:30),
+      padding: const EdgeInsets.only(left: 10, right: 30, top: 100, bottom: 30),
       child: Row(
         children: [
           Expanded(
@@ -137,7 +147,7 @@ class place_detail_main extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(left:20),
+                  padding: const EdgeInsets.only(left: 20),
                   child: const Text(
                     '미술관/서구',
                     style: TextStyle(
@@ -147,15 +157,12 @@ class place_detail_main extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    padding: const EdgeInsets.only(left:20,top:20),
-                    child: const Text(
-                        '서구 만년동 둔산대로 155',
+                    padding: const EdgeInsets.only(left: 20, top: 20),
+                    child: const Text('서구 만년동 둔산대로 155',
                         style: TextStyle(
                           color: Colors.black87,
                           fontSize: 15,
-                        ))
-                )
-
+                        )))
               ],
             ),
           ),
@@ -171,7 +178,7 @@ class place_detail_main extends StatelessWidget {
 }
 
 // 타이틀섹션 함수로 만듦
-Widget titleSection (){
+Widget titleSection() {
   return Container(
     child: Image.asset(
       'images/lake2.jpg',
@@ -180,10 +187,5 @@ Widget titleSection (){
       fit: BoxFit.fill,
     ),
   );
-
 }
 // 타이틀섹션 함수로 만든거 끝
-
-
-
-
