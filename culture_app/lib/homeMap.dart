@@ -1,6 +1,13 @@
 import 'package:culture_app/bottomNav.dart';
+import 'package:culture_app/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'search.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class HomeMap extends StatefulWidget {
   const HomeMap({Key? key}) : super(key: key);
@@ -45,6 +52,7 @@ class _HomeMapState extends State<HomeMap> {
                       ),
                       Container(
                         decoration: BoxDecoration(
+                          color: Colors.white70,
                           border: Border.all(color: Color(0xff6667AB), width: 2),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(10.0),
@@ -60,9 +68,16 @@ class _HomeMapState extends State<HomeMap> {
                               ),
                             ),
                             Container(
-                              width: 290.0,
+                              width: 260.0.w,
                             ),
-                            const Icon(Icons.search),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Search()));
+                                },
+                                child: const Icon(Icons.search)),
                           ],
                         ),
                       ),
@@ -76,65 +91,95 @@ class _HomeMapState extends State<HomeMap> {
                   children: [
                     Column(
                       children: [
-                        Container(
+                        Card(
+                          elevation: 4,
                           margin: EdgeInsets.only(bottom: 5),
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("뮤지컬"),
-                            onPressed: () => {},
+                          color: Colors.white,
+                          child: Container(
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("뮤지컬",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("축제"),
-                            onPressed: () => {},
+
+                        Card(
+                          color: Colors.white,
+                          elevation: 4,
+                         child: Container(
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("축제",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
                         ),
+
                       ],
                     ),
                     Column(
                       children: [
-                        Container(
+                        Card(
                           margin: EdgeInsets.only(bottom: 5),
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("전시회"),
-                            onPressed: () => {},
+                          elevation: 4,
+                          color: Colors.white,
+                          child:Container(
+
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("전시회",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("만들기 공방"),
-                            onPressed: () => {},
+
+                        Card(
+                          color:Colors.white,
+                          elevation: 4,
+                          child: Container(
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("만들기 공방",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
                         ),
+
                       ],
                     ),
                     Column(
                       children: [
-                        Container(
+                        Card(
+                          elevation: 4,
                           margin: EdgeInsets.only(bottom: 5),
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("버스킹"),
-                            onPressed: () => {},
+                          child:Container(
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("버스킹",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 120,
-                          height: 40,
-                          child: OutlinedButton(
-                            child: Text("시사회"),
-                            onPressed: () => {},
+                        Card(
+                          color: Colors.white,
+                          elevation: 4,
+                          child: Container(
+                            width: 120,
+                            height: 40,
+                            child: OutlinedButton(
+                              child: Text("시사회",style:TextStyle(color: Color(0xff6667AB),fontWeight: FontWeight.bold)),
+                              onPressed: () => {},
+                            ),
                           ),
-                        ),
+
+                        )
+
                       ],
                     ),
                   ],
@@ -144,6 +189,20 @@ class _HomeMapState extends State<HomeMap> {
           ),
          ],
         ),
+        floatingActionButton: Container(
+          width: 80.w,
+          height: 80.h,
+          child:FloatingActionButton(
+            backgroundColor: Color(0xff6667AB),
+            onPressed: () => {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Homepage()),)
+              //homeMap 연결시키면 됩니다
+            },
+            child: Icon(Icons.map,
+            size: 30.w,),
+          ),
+        )
       ),
     );
   }
