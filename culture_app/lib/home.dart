@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:culture_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +13,81 @@ import 'content.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+class GetContentImageRandom extends StatelessWidget {
+  Map myMap = new Map();
+  List myList = [];
+
+  Future<void> init() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    FirebaseFirestore.instance
+        .collection('contentCard')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        if (doc['img'] == null) {
+          myMap.addEntries(
+              [MapEntry(doc['realtitle'], const AssetImage('logo.png'))]);
+        } else {
+          myMap.addEntries(
+              [MapEntry(doc['realtitle'], Image.network(doc['img']))]);
+        }
+        myList.add(doc['realtitle']);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Row(
+        children: List.generate(6, (index) {
+      if (index == 5) {
+        return Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10.0),
+                      )),
+                  width: 110.0.w,
+                  height: 210.0.h,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Icon(Icons.more), Text("더 보기")],
+                  ),
+                ),
+                Text("")
+              ],
+            ));
+      } else {
+        return Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(10.0))),
+                width: 110.0.w,
+                height: 210.0.h,
+                child: myMap[myList[index]],
+              ),
+              //firevase에서 doc으로 가져와서 텍스트 넣기
+              Text(myList[index]),
+            ],
+          ),
+        );
+      }
+    }));
+  }
+}
+
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
@@ -19,7 +96,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  CollectionReference frTest = FirebaseFirestore.instance.collection('test');
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
   List<content> contents = [
     content(
@@ -30,8 +106,39 @@ class _HomepageState extends State<Homepage> {
         '22.01.22-22.01.22')
   ];
 
+  Map contentsMap = Map<String, dynamic>();
+  List randomList = [];
+
+  // void getImageData() async {
+  //   //선언 async await 문제도 아니구
+  //   await FirebaseFirestore.instance
+  //       .collection('contentCard')
+  //       .get()
+  //       .then((QuerySnapshot querySnapshot) {
+  //     for (var doc in querySnapshot.docs) {
+  //       //doc['realtitle']
+  //       if (doc['img'] == null) {
+  //         contentsMap
+  //             .addEntries([MapEntry(doc['realtitle'], AssetImage('logo.png'))]);
+  //       } else {
+  //         contentsMap.addEntries([
+  //           MapEntry(
+  //               doc['realtitle'],
+  //               Image.network(
+  //                 doc['img'],
+  //                 fit: BoxFit.fill,
+  //               ))
+  //         ]);
+  //         //Image.network(doc['img'][0]);
+  //       }
+  //       randomList.add(doc['realtitle']);
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+    //getImageData();
     return Scaffold(
       bottomNavigationBar: BottomNavigate(),
       body: Column(
@@ -100,7 +207,7 @@ class _HomepageState extends State<Homepage> {
                       margin: const EdgeInsets.only(left: 20),
                     ),
                     Text(
-                      "BIG_Title",
+                      "추천 콘텐츠",
                       style: Theme.of(context).textTheme.headline5,
                     )
                   ],
@@ -109,27 +216,54 @@ class _HomepageState extends State<Homepage> {
                     scrollDirection: Axis.horizontal,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                          children: List.generate(6, (index) {
-                        return Container(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                child: Image.network(
-                                  contents[0].img, // index를 []안에 넣으면 됨
-                                  width: 130.0,
-                                  height: 200.0,
-                                ),
-                              ),
-                              Container(
-                                child: Text(contents[0].realtitle),
-                                width: 130,
-                              ),
-                            ],
-                          ),
-                        );
-                      })),
+                      child: GetContentImageRandom(),
+                      // Row(
+                      //     children: List.generate(6, (index) {
+                      //   if (index == 5) {
+                      //     return Container(
+                      //         padding: const EdgeInsets.all(10.0),
+                      //         child: Column(
+                      //           children: [
+                      //             Container(
+                      //               decoration: BoxDecoration(
+                      //                   color: Colors.grey,
+                      //                   borderRadius: const BorderRadius.all(
+                      //                     Radius.circular(10.0),
+                      //                   )),
+                      //               width: 110.0.w,
+                      //               height: 210.0.h,
+                      //               child: Column(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.center,
+                      //                 children: [
+                      //                   Icon(Icons.more),
+                      //                   Text("더 보기")
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //             Text("")
+                      //           ],
+                      //         ));
+                      //   } else {
+                      //     return Container(
+                      //       padding: const EdgeInsets.all(10.0),
+                      //       child: Column(
+                      //         children: [
+                      //           Container(
+                      //             decoration: BoxDecoration(
+                      //                 borderRadius: const BorderRadius.all(
+                      //                     Radius.circular(10.0))),
+                      //             width: 110.0.w,
+                      //             height: 210.0.h,
+                      //             child: contentsMap[randomList[index]],
+                      //           ),
+                      //           //firevase에서 doc으로 가져와서 텍스트 넣기
+                      //           Text(randomList[index]),
+                      //         ],
+                      //       ),
+                      //     );
+                      //   }
+                      // })),
                     )),
                 myMargin,
                 Row(
@@ -232,12 +366,10 @@ class _HomepageState extends State<Homepage> {
         child: FloatingActionButton(
           backgroundColor: Color(0xff6667AB),
           onPressed: () => {
-            //homeMap 연결시키면 됩니다
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const HomeMap()),
             )
-            //homeMap 연결시키면 됩니다
           },
           child: Icon(Icons.map, size: 30.w),
         ),
