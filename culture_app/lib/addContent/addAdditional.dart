@@ -161,145 +161,148 @@ class _AdditionalState extends State<Additional> {
                   style: TextStyle(fontSize: 40, color: Colors.white),
                 )),
           ]),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            margin:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
-            color: Colors.white,
-            child: ListView(
-              children: [
-                TextField(
-                  enabled: false,
-                  controller: TextEditingController(
-                      text:
-                          '${first.year}/${first.month}/${first.day}~${second.year}/${second.month}/${second.day}'),
-                  decoration: InputDecoration(labelText: '날짜', hintText: '날짜'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    selectDate();
-                  },
-                  child: Text(
-                    '날짜 선택',
-                    style: TextStyle(
-                        color: AddAppBar.color(), fontWeight: FontWeight.bold),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              margin: EdgeInsets.only(top: 270),
+              color: Colors.white,
+              child: ListView(
+                children: [
+                  TextField(
+                    enabled: false,
+                    controller: TextEditingController(
+                        text:
+                            '${first.year}/${first.month}/${first.day}~${second.year}/${second.month}/${second.day}'),
+                    decoration:
+                        InputDecoration(labelText: '날짜', hintText: '날짜'),
                   ),
-                ),
-                Divider(thickness: 1.5),
-                Text(
-                  '시간 ${timeResult.start.format(context)}-${timeResult.end.format(context)}',
-                  style: AddAppBar.textStyleSmall(),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TimeRange(
-                    borderColor: color,
-                    activeBackgroundColor: color,
-                    backgroundColor: Colors.white,
-                    fromTitle: Text('Start'),
-                    toTitle: Text('End'),
-                    firstTime: TimeOfDay(hour: 00, minute: 30),
-                    lastTime: TimeOfDay(hour: 23, minute: 30),
-                    timeBlock: 30,
-                    timeStep: 30,
-                    onRangeCompleted: (range) => setState(() {
-                          timeResult = range!;
-                        })),
-                Divider(
-                  thickness: 1.5,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: titleController,
-                  decoration:
-                      InputDecoration(labelText: '컨텐츠 이름', hintText: '컨텐츠 이름'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: detailController,
-                  decoration:
-                      InputDecoration(labelText: '간략한 설명', hintText: '간략한 설명'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  '사진 넣기',
-                  style: TextStyle(fontSize: 15, color: Colors.black54),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //image picker
-                Container(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        height: 130,
-                        width: 130,
-                        color: Colors.black12,
-                        child: image != null
-                            ? Image.file(image!)
-                            : IconButton(
-                                tooltip: '첫번째 사진',
-                                onPressed: () {
-                                  pikingImage();
-                                },
-                                icon: Icon(
-                                  Icons.camera_enhance,
-                                  size: 40,
-                                ),
-                              ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        height: 130,
-                        width: 130,
-                        color: Colors.black12,
-                        child: image2 != null
-                            ? Image.file(image2!)
-                            : IconButton(
-                                tooltip: '두번째 사진',
-                                onPressed: () {
-                                  pikingImage2();
-                                },
-                                icon: Icon(
-                                  Icons.camera_enhance,
-                                  size: 40,
-                                ),
-                              ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-
-                ElevatedButton(
-                    style: buttonThema2(),
+                  TextButton(
                     onPressed: () {
-                      addContent();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Complete(),
-                          ));
+                      selectDate();
                     },
-                    child: const Text(
-                      '등록하기',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )),
-                SizedBox(
-                  height: 40,
-                )
-              ],
+                    child: Text(
+                      '날짜 선택',
+                      style: TextStyle(
+                          color: AddAppBar.color(),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Divider(thickness: 1.5),
+                  Text(
+                    '시간 ${timeResult.start.format(context)}-${timeResult.end.format(context)}',
+                    style: AddAppBar.textStyleSmall(),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TimeRange(
+                      borderColor: color,
+                      activeBackgroundColor: color,
+                      backgroundColor: Colors.white,
+                      fromTitle: Text('Start'),
+                      toTitle: Text('End'),
+                      firstTime: TimeOfDay(hour: 00, minute: 30),
+                      lastTime: TimeOfDay(hour: 23, minute: 30),
+                      timeBlock: 30,
+                      timeStep: 30,
+                      onRangeCompleted: (range) => setState(() {
+                            timeResult = range!;
+                          })),
+                  Divider(
+                    thickness: 1.5,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                        labelText: '컨텐츠 이름', hintText: '컨텐츠 이름'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    controller: detailController,
+                    decoration: InputDecoration(
+                        labelText: '간략한 설명', hintText: '간략한 설명'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    '사진 넣기',
+                    style: TextStyle(fontSize: 15, color: Colors.black54),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //image picker
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          height: 130,
+                          width: 130,
+                          color: Colors.black12,
+                          child: image != null
+                              ? Image.file(image!)
+                              : IconButton(
+                                  tooltip: '첫번째 사진',
+                                  onPressed: () {
+                                    pikingImage();
+                                  },
+                                  icon: Icon(
+                                    Icons.camera_enhance,
+                                    size: 40,
+                                  ),
+                                ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          height: 130,
+                          width: 130,
+                          color: Colors.black12,
+                          child: image2 != null
+                              ? Image.file(image2!)
+                              : IconButton(
+                                  tooltip: '두번째 사진',
+                                  onPressed: () {
+                                    pikingImage2();
+                                  },
+                                  icon: Icon(
+                                    Icons.camera_enhance,
+                                    size: 40,
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+
+                  ElevatedButton(
+                      style: buttonThema2(),
+                      onPressed: () {
+                        addContent();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Complete(),
+                            ));
+                      },
+                      child: const Text(
+                        '등록하기',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
+                  SizedBox(
+                    height: 40,
+                  )
+                ],
+              ),
             ),
           ),
         ],
