@@ -54,6 +54,7 @@ class _AdditionalState extends State<Additional> {
         text: title,
       );
     });
+    super.initState();
     detailController.addListener(() {
       detail = detailController.text;
       detailController.value = detailController.value.copyWith(text: detail);
@@ -117,13 +118,7 @@ class _AdditionalState extends State<Additional> {
             'img': '${defaultImagePath}',
             'img2': '${defaultImagePath}'
           })
-          .then((value) => {
-                content.doc(value.id).collection(value.id).doc('detail').set({
-                  'introduce': '${detail}',
-                  'time':
-                      '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}:${timeResult.end.minute}'
-                })
-              })
+          .then((value) => print("add complete"))
           .catchError((error) => {print("failed")});
     }
 
