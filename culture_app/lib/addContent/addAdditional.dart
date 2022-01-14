@@ -148,6 +148,7 @@ class _AdditionalState extends State<Additional> {
               height: MediaQuery.of(context).size.height * 0.2,
             ),
             Container(
+                height: MediaQuery.of(context).size.height * 0.8,
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 width: double.infinity,
                 color: Colors.black54,
