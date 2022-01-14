@@ -11,132 +11,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bottomNav.dart';
 import 'content.dart';
 
-<<<<<<< HEAD
-FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-class GetContentImageRandom extends StatelessWidget {
-  Map myMap = new Map();
-  List myList = [];
-
-  Future<void> init() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    FirebaseFirestore.instance
-        .collection('contentCard')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      for (var doc in querySnapshot.docs) {
-        if (doc['img'] == null) {
-          myMap.addEntries(
-              [MapEntry(doc['realtitle'], const AssetImage('logo.png'))]);
-        } else {
-          myMap.addEntries(
-              [MapEntry(doc['realtitle'], Image.network(doc['img']))]);
-        }
-        myList.add(doc['realtitle']);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Row(
-        children: List.generate(6, (index) {
-      if (index == 5) {
-        return Container(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10.0),
-                      )),
-                  width: 110.0.w,
-                  height: 210.0.h,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Icon(Icons.more), Text("더 보기")],
-                  ),
-                ),
-                Text("")
-              ],
-            ));
-      } else {
-        return Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(10.0))),
-                width: 110.0.w,
-                height: 210.0.h,
-                child: myMap[myList[index]],
-              ),
-              //firevase에서 doc으로 가져와서 텍스트 넣기
-              Text(myList[index]),
-            ],
-          ),
-        );
-      }
-    }));
-  }
-}
-
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
-
-  @override
-  _HomepageState createState() => _HomepageState();
-}
-
-class _HomepageState extends State<Homepage> {
-  Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
-  List<content> contents = [
-    content(
-        21012360,
-        '백지영 전국투어 콘서트 <BAEK HUG>',
-        'http://ticketimage.interpark.com/rz/image/play/goods/poster/21/21012360_p_s.jpg',
-        '대전컨벤션센터(DCC)',
-        '22.01.22-22.01.22')
-  ];
-
-  Map contentsMap = Map<String, dynamic>();
-  List randomList = [];
-
-  // void getImageData() async {
-  //   //선언 async await 문제도 아니구
-  //   await FirebaseFirestore.instance
-  //       .collection('contentCard')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     for (var doc in querySnapshot.docs) {
-  //       //doc['realtitle']
-  //       if (doc['img'] == null) {
-  //         contentsMap
-  //             .addEntries([MapEntry(doc['realtitle'], AssetImage('logo.png'))]);
-  //       } else {
-  //         contentsMap.addEntries([
-  //           MapEntry(
-  //               doc['realtitle'],
-  //               Image.network(
-  //                 doc['img'],
-  //                 fit: BoxFit.fill,
-  //               ))
-  //         ]);
-  //         //Image.network(doc['img'][0]);
-  //       }
-  //       randomList.add(doc['realtitle']);
-  //     }
-  //   });
-  // }
-=======
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
@@ -145,8 +19,6 @@ class Homepage extends StatelessWidget {
     "http://cdnimage.dailian.co.kr/news/202011/news_1605229225_936431_m_1.jpeg",
     "https://i.pinimg.com/736x/9c/18/50/9c1850e31d993169d20a2162e0b65ba2.jpg"
   ];
-
->>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
 
   @override
   Widget build(BuildContext context) {
@@ -222,63 +94,7 @@ class Homepage extends StatelessWidget {
                     )
                   ],
                 ),
-<<<<<<< HEAD
-                SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: GetContentImageRandom(),
-                      // Row(
-                      //     children: List.generate(6, (index) {
-                      //   if (index == 5) {
-                      //     return Container(
-                      //         padding: const EdgeInsets.all(10.0),
-                      //         child: Column(
-                      //           children: [
-                      //             Container(
-                      //               decoration: BoxDecoration(
-                      //                   color: Colors.grey,
-                      //                   borderRadius: const BorderRadius.all(
-                      //                     Radius.circular(10.0),
-                      //                   )),
-                      //               width: 110.0.w,
-                      //               height: 210.0.h,
-                      //               child: Column(
-                      //                 mainAxisAlignment:
-                      //                     MainAxisAlignment.center,
-                      //                 children: [
-                      //                   Icon(Icons.more),
-                      //                   Text("더 보기")
-                      //                 ],
-                      //               ),
-                      //             ),
-                      //             Text("")
-                      //           ],
-                      //         ));
-                      //   } else {
-                      //     return Container(
-                      //       padding: const EdgeInsets.all(10.0),
-                      //       child: Column(
-                      //         children: [
-                      //           Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: const BorderRadius.all(
-                      //                     Radius.circular(10.0))),
-                      //             width: 110.0.w,
-                      //             height: 210.0.h,
-                      //             child: contentsMap[randomList[index]],
-                      //           ),
-                      //           //firevase에서 doc으로 가져와서 텍스트 넣기
-                      //           Text(randomList[index]),
-                      //         ],
-                      //       ),
-                      //     );
-                      //   }
-                      // })),
-                    )),
-=======
                 mytemp(),
->>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
                 myMargin,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -433,8 +249,8 @@ Widget mytemp() {
               ));
         }
 
-        return const Scaffold(
-          body: CircularProgressIndicator(),
+        return Container(
+          child: CircularProgressIndicator(),
         );
       });
 }
