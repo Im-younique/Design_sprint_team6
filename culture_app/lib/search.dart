@@ -44,8 +44,6 @@ class _SearchState extends State<Search> {
                       ],
                     ),
                     Text("검색필터"),
-<<<<<<< HEAD
-=======
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -79,7 +77,6 @@ class _SearchState extends State<Search> {
                     ),
                     Chip(label: Text("배우"))
 
->>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
                     // for(int i = 0; i < gernefilter.length; i++) {
                     //   if(OverflowBar) {
                     //      row라인 overflow시에 줄바꿈을 하고싶다.
