@@ -15,9 +15,7 @@ class Firstlogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyPage(),
-    );
+    return MyPage();
   }
 }
 
@@ -42,9 +40,7 @@ class Authentication extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return SignInScreen(
-            providerConfigs: [
-              EmailProviderConfiguration()
-            ],
+            providerConfigs: [EmailProviderConfiguration()],
           );
         }
         return ChatScreen();
@@ -52,4 +48,3 @@ class Authentication extends StatelessWidget {
     );
   }
 }
-
