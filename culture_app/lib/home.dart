@@ -10,6 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bottomNav.dart';
 import 'content.dart';
+import 'jiyoung_detail_main.dart';
+import 'jaewan_detail_main.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({Key? key}) : super(key: key);
@@ -228,7 +230,25 @@ Widget mytemp() {
                                 BorderRadius.all(Radius.circular(10.0))),
                         width: 110.w,
                         height: 210.0.h,
-                        child: Image.network(doc['img'], fit: BoxFit.fill)),
+                        child: InkWell(
+                            onTap: () {
+                              if (doc['realtitle'] ==
+                                  "백지영 전국투어 콘서트 <BAEK HUG>") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            jiyoung_detail_main()));
+                              } else if (doc['realtitle'] == '이재완의 철학 콘서트') {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            jaewan_detail_main()));
+                              }
+                            },
+                            child:
+                                Image.network(doc['img'], fit: BoxFit.fill))),
                     Container(
                       width: 110.w,
                       child: Text(doc['realtitle'],
