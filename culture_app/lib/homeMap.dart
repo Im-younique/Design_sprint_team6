@@ -19,12 +19,20 @@ class HomeMap extends StatefulWidget {
 
 class _HomeMapState extends State<HomeMap> {
   late GoogleMapController mapController;
+<<<<<<< HEAD
+  final LatLng _center = const LatLng(36.366327, 127.345094); // 시립미술관 위치는 36.367039, 127.386317
+=======
   final LatLng _center =
       const LatLng(36.366327, 127.345094); // 시립미술관 위치는 36.367039, 127.386317
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
   Set<Marker> _createMarker() {
     return <Marker>[
       Marker(
@@ -33,9 +41,18 @@ class _HomeMapState extends State<HomeMap> {
         infoWindow: InfoWindow(
           title: "대전시립미술관",
           onTap: () {
+<<<<<<< HEAD
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => place_detail_main()));
+          },
+
+=======
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => place_detail_main()));
           },
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
         ),
       ),
       Marker(
@@ -44,6 +61,21 @@ class _HomeMapState extends State<HomeMap> {
         infoWindow: InfoWindow(
           title: "이재완의 철학 콘서트",
           onTap: () {
+<<<<<<< HEAD
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => place_detail_main()));
+          },
+
+        ),
+      ),
+
+    ].toSet();
+  }
+
+
+=======
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => place_detail_main()));
           },
@@ -52,10 +84,42 @@ class _HomeMapState extends State<HomeMap> {
     ].toSet();
   }
 
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+<<<<<<< HEAD
+        bottomNavigationBar: BottomNavigate(),
+        body: Stack(children: [
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 17.0,
+            ),
+            markers: _createMarker(),
+
+          ),
+          Positioned(
+            top: 40,
+            child: Column(
+              children: [
+                Container(
+                  // 검색창 영역
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white70,
+                          border: Border.all(color: Color(0xff6667AB), width: 2),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10.0),
+=======
           bottomNavigationBar: BottomNavigate(),
           body: Stack(
             children: [
@@ -78,6 +142,7 @@ class _HomeMapState extends State<HomeMap> {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(left: 20),
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -247,7 +312,27 @@ class _HomeMapState extends State<HomeMap> {
                 size: 30.w,
               ),
             ),
+<<<<<<< HEAD
+          ),
+         ],
+        ),
+        floatingActionButton: Container(
+          width: 80.w,
+          height: 80.h,
+          child:FloatingActionButton(
+            backgroundColor: Color(0xff6667AB),
+            onPressed: () => {
+              Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Homepage()),)
+            },
+            child: Icon(Icons.insert_drive_file,
+            size: 30.w,),
+          ),
+        )
+      ),
+=======
           )),
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
     );
   }
 }

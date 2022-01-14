@@ -22,6 +22,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //getImageData();
     return Scaffold(
       bottomNavigationBar: BottomNavigate(),
       body: Column(
