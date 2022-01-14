@@ -162,10 +162,10 @@ class _jiyoung_reviewState extends State<jiyoung_review> {
     return Container(
       padding: EdgeInsets.all(32),
       child: Text(
-        '재밌어요!!~',
+        '아직 등록된 리뷰가 없습니다.',
         style: TextStyle(
           color: Colors.black87,
-          fontSize: 30,
+          fontSize: 15,
         ),
         softWrap: true,
       ),

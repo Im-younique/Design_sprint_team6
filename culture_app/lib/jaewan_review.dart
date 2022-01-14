@@ -163,10 +163,10 @@ class _jaewan_reviewState extends State<jaewan_review> {
     return Container(
       padding: EdgeInsets.all(32),
       child: Text(
-        '유익해요!!~',
+        '아직 등록된 리뷰가 없습니다.',
         style: TextStyle(
           color: Colors.black87,
-          fontSize: 30,
+          fontSize: 15,
         ),
         softWrap: true,
       ),
