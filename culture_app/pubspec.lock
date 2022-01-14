@@ -78,6 +78,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.2"
+<<<<<<< HEAD
   crypto:
     dependency: transitive
     description:
@@ -85,6 +86,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+=======
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
   csslib:
     dependency: transitive
     description:

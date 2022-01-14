@@ -54,7 +54,10 @@ class _AdditionalState extends State<Additional> {
         text: title,
       );
     });
+<<<<<<< HEAD
     super.initState();
+=======
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
     detailController.addListener(() {
       detail = detailController.text;
       detailController.value = detailController.value.copyWith(text: detail);
@@ -118,7 +121,17 @@ class _AdditionalState extends State<Additional> {
             'img': '${defaultImagePath}',
             'img2': '${defaultImagePath}'
           })
+<<<<<<< HEAD
           .then((value) => print("add complete"))
+=======
+          .then((value) => {
+                content.doc(value.id).collection(value.id).doc('detail').set({
+                  'introduce': '${detail}',
+                  'time':
+                      '${timeResult.start.hour}:${timeResult.start.minute}-${timeResult.end.hour}:${timeResult.end.minute}'
+                })
+              })
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
           .catchError((error) => {print("failed")});
     }
 
@@ -164,6 +177,7 @@ class _AdditionalState extends State<Additional> {
             child: ListView(
               children: [
                 TextField(
+                  enabled: false,
                   controller: TextEditingController(
                       text:
                           '${first.year}/${first.month}/${first.day}~${second.year}/${second.month}/${second.day}'),
@@ -214,7 +228,8 @@ class _AdditionalState extends State<Additional> {
                 const SizedBox(
                   height: 20,
                 ),
-                const TextField(
+                TextField(
+                  controller: detailController,
                   decoration:
                       InputDecoration(labelText: '간략한 설명', hintText: '간략한 설명'),
                 ),

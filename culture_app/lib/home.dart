@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'bottomNav.dart';
 import 'content.dart';
 
+<<<<<<< HEAD
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class GetContentImageRandom extends StatelessWidget {
@@ -135,6 +136,17 @@ class _HomepageState extends State<Homepage> {
   //     }
   //   });
   // }
+=======
+class Homepage extends StatelessWidget {
+  Homepage({Key? key}) : super(key: key);
+  Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
+  List<String> adList = [
+    "https://i.pinimg.com/564x/f5/86/23/f58623fe8765b80ce36966c5f0d207d6.jpg",
+    "http://cdnimage.dailian.co.kr/news/202011/news_1605229225_936431_m_1.jpeg",
+    "https://i.pinimg.com/736x/9c/18/50/9c1850e31d993169d20a2162e0b65ba2.jpg"
+  ];
+
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
 
   @override
   Widget build(BuildContext context) {
@@ -169,8 +181,6 @@ class _HomepageState extends State<Homepage> {
                     Container(
                       width: 260.0.w,
                     ),
-                    //Expanded() 적용시 constraintsError 발생
-                    //마찬가지로 때려넣으면 반응형으로 적응이 안되서,,
                     InkWell(
                         onTap: () {
                           Navigator.push(
@@ -212,6 +222,7 @@ class _HomepageState extends State<Homepage> {
                     )
                   ],
                 ),
+<<<<<<< HEAD
                 SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
@@ -265,6 +276,9 @@ class _HomepageState extends State<Homepage> {
                       //   }
                       // })),
                     )),
+=======
+                mytemp(),
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
                 myMargin,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -335,17 +349,16 @@ class _HomepageState extends State<Homepage> {
                 myMargin,
                 myMargin,
                 Container(
-                  width: 300.0,
-                  height: 200.0,
-                  //크기를 지정해줘야 오류가 없는데 반응형으로 나타나진 않음..
+                  width: 300.0.w,
+                  height: 200.0.h,
                   child: Swiper(
                     itemBuilder: (BuildContext context, int index) {
                       return Image.network(
-                        "https://via.placeholder.com/288x188",
+                        adList[index],
                         fit: BoxFit.fill,
                       );
                     },
-                    itemCount: 10,
+                    itemCount: 3,
                     viewportFraction: 0.8,
                     scale: 0.9,
                     itemWidth: 288.0,
@@ -361,6 +374,7 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       floatingActionButton: Container(
+        margin: EdgeInsets.only(left: 2.0),
         width: 80.w,
         height: 80.h,
         child: FloatingActionButton(
@@ -376,4 +390,51 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
+}
+
+Widget mytemp() {
+  return FutureBuilder<QuerySnapshot>(
+      future: FirebaseFirestore.instance.collection('contentCard').get(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("error");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<Widget> myScroll = [];
+          snapshot.data!.docs.forEach((doc) {
+            myScroll.add(Container(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Container(
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        width: 110.w,
+                        height: 210.0.h,
+                        child: Image.network(doc['img'], fit: BoxFit.fill)),
+                    Container(
+                      width: 110.w,
+                      child: Text(doc['realtitle'],
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 10.0.w,
+                              overflow: TextOverflow.ellipsis)),
+                    )
+                  ],
+                )));
+          });
+
+          return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(children: myScroll),
+              ));
+        }
+
+        return const Scaffold(
+          body: CircularProgressIndicator(),
+        );
+      });
 }

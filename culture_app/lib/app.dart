@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'homeMap.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 //Start App view
 class CultureApp extends StatelessWidget {
   const CultureApp({Key? key}) : super(key: key);
@@ -26,6 +25,7 @@ class CultureApp extends StatelessWidget {
             foregroundColor: Colors.black,
           ),
           primaryColor: Colors.white,
+          fontFamily: 'SpoqaHanSansNeo',
           accentColor: const Color(0x6666AB),
         ),
         home: Homepage(),

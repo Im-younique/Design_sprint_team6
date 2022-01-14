@@ -12,9 +12,10 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   Widget myMargin = Container(margin: const EdgeInsets.only(top: 10));
 
-  List gernefilter = ["전체", '뮤지컬', "전시회", "버스킹", "축제", "만들기 공방", "시사회"];
+  List gernefilter = ["전체", '뮤지컬', "전시회", "버스킹"];
+  List gernefilter1 = ["축제", "만들기 공방", "시사회"];
   List sortfilter = ["거리순", "인기순", "리뷰순", "별점순"];
-  List artistfilter = ["전체", "음악가", "미술가", "디자이너", "배우"];
+  List artistfilter = ["전체", "음악가", "미술가", "디자이너"];
 
   void showFilter() {
     showDialog(
@@ -43,6 +44,42 @@ class _SearchState extends State<Search> {
                       ],
                     ),
                     Text("검색필터"),
+<<<<<<< HEAD
+=======
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (var item in gernefilter)
+                            Chip(
+                              label: Text(item),
+                            )
+                        ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        for (var item in gernefilter1)
+                          Chip(
+                            label: Text(item),
+                          )
+                      ],
+                    ),
+                    Text("정렬기준"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        for (var item in sortfilter) Chip(label: Text(item))
+                      ],
+                    ),
+                    Text("아티스트"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        for (var item in artistfilter) Chip(label: Text(item))
+                      ],
+                    ),
+                    Chip(label: Text("배우"))
+
+>>>>>>> ffe5f2de5ff1c76d4ec79fa7dee039d4f78cbabb
                     // for(int i = 0; i < gernefilter.length; i++) {
                     //   if(OverflowBar) {
                     //      row라인 overflow시에 줄바꿈을 하고싶다.
@@ -165,19 +202,5 @@ class _SearchTabState extends State<SearchTab> {
       height: 36.h,
       child: _buildTextComposer(),
     );
-  }
-}
-
-class SearchFilter extends StatefulWidget {
-  const SearchFilter({Key? key}) : super(key: key);
-
-  @override
-  _SearchFilterState createState() => _SearchFilterState();
-}
-
-class _SearchFilterState extends State<SearchFilter> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
