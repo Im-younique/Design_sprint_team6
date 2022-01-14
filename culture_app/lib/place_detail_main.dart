@@ -40,12 +40,35 @@ class _place_detail_mainState extends State<place_detail_main> {
                   fit: BoxFit.fill,
                 ),
               ),
+            ),Positioned(
+              top: 15,
+              left: 5,
+              child:backSection(),
             )
-          ]));
+          ],
+          ));
 
   }
 
 
+  Widget backSection (){
+    return Container(
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              color: Color(0xff6667AB),
+              iconSize: 25,
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),]
+        )
+    );
+//뒤로가기끝
+
+
+  }
   // 버튼섹션 함수로 바꿨음
   Widget buttonSection() {
     return Container(

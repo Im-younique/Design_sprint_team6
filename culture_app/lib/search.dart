@@ -16,35 +16,50 @@ class _SearchState extends State<Search> {
   List sortfilter = ["거리순", "인기순", "리뷰순", "별점순"];
   List artistfilter = ["전체", "음악가", "미술가", "디자이너", "배우"];
 
-  Widget showFilter() {
-    return Dialog(
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: 600.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Column(
-              children: [
-                Text("검색필터"),
-                Row(
+  void showFilter() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (var item in gernefilter) Chip(label: Text(item))
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(margin: EdgeInsets.only(top: 5)),
+                        InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Icon(Icons.close),
+                        )
+                      ],
+                    ),
+                    Text("검색필터"),
+                    // for(int i = 0; i < gernefilter.length; i++) {
+                    //   if(OverflowBar) {
+                    //      row라인 overflow시에 줄바꿈을 하고싶다.
+                    //   } else {
+
+                    //   }
+                    // }
+                    // for (var item in gernefilter)
+                    //   Container(
+                    //       margin: EdgeInsets.all(5),
+                    //       child: Chip(label: Text(item)))
                   ],
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-          Positioned(
-            top: -100,
-            child: Text("sdf"),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
 
   @override
