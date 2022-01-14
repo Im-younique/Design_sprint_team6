@@ -1,5 +1,6 @@
 import 'package:culture_app/bottomNav.dart';
 import 'package:culture_app/home.dart';
+import 'package:culture_app/jiyoung_detail_main.dart';
 import 'package:culture_app/place_detail_main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,6 +9,8 @@ import 'search.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'place_detail_main.dart';
+import 'jiyoung_detail_main.dart';
+import 'jaewan_detail_main.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -29,13 +32,13 @@ class _HomeMapState extends State<HomeMap> {
   Set<Marker> _createMarker() {
     return <Marker>[
       Marker(
-        markerId: MarkerId("marker_1"),
+        markerId: MarkerId("marker_1234"),
         position: LatLng(36.374893, 127.39167),
         infoWindow: InfoWindow(
           title: "백지영 전국투어 콘서트 <BAEK HUG>",
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => place_detail_main()));
+                MaterialPageRoute(builder: (context) => jiyoung_detail_main()));
           },
         ),
       ),
@@ -95,13 +98,13 @@ class _HomeMapState extends State<HomeMap> {
         ),
       ),
       Marker(
-        markerId: MarkerId("marker_1"),
+        markerId: MarkerId("marker_11234"),
         position: LatLng(36.366547, 127.344469),
         infoWindow: InfoWindow(
           title: "이재완의 철학 콘서트",
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => place_detail_main()));
+                MaterialPageRoute(builder: (context) => jaewan_detail_main()));
           },
         ),
       ),
